@@ -1,0 +1,9 @@
+,species1,species10,species11,species12,species13,species14,species15,species16,species17,species18,species19,species2,species20,species21,species22,species23,species24,species25,species26,species27,species28,species29,species3,species30,species31,species32,species33,species34,species35,species36,species37,species38,species39,species4,species40,species41,species42,species43,species44,species45,species46,species47,species48,species49,species5,species50,species6,species7,species8,species9
+site1_even,2,1,4,3,0,2,1,2,1,2,1,1,4,2,0,1,2,1,3,1,1,4,1,3,3,3,0,1,6,1,1,1,1,1,1,2,1,1,0,0,3,0,0,5,3,1,1,0,3,2
+site2_even,2,1,2,2,2,4,0,1,0,2,1,2,1,0,0,1,2,3,1,1,2,1,1,1,0,2,3,0,2,3,1,1,1,1,0,1,2,3,2,4,0,2,2,2,1,2,1,2,2,0
+site3_even,3,6,2,1,2,2,0,6,0,1,1,1,3,0,2,0,1,2,0,2,0,1,1,2,2,2,0,3,2,2,1,3,4,3,1,2,3,3,1,0,4,2,1,1,1,1,2,0,0,2
+site4_even,0,2,1,0,5,3,0,0,0,1,0,3,0,1,1,1,2,1,1,3,1,3,1,1,0,1,1,0,3,3,2,3,1,0,1,0,1,3,0,2,1,0,2,1,2,1,2,2,3,3
+site1_uneven,20,0,2,1,1,1,2,1,2,1,0,3,0,1,1,0,1,1,2,0,1,0,5,2,0,1,0,0,0,1,1,0,2,2,0,1,0,1,0,1,0,0,0,1,3,0,3,4,2,1
+site2_uneven,9,2,3,2,2,1,3,3,1,1,1,12,1,2,1,0,0,0,2,1,0,0,4,1,2,0,0,0,1,0,0,0,2,5,0,0,0,2,0,0,0,0,0,0,4,0,1,0,5,2
+site3_uneven,14,1,2,3,1,4,2,2,0,3,0,11,2,0,0,1,0,1,2,1,0,0,5,0,0,1,1,0,0,0,0,0,0,2,0,0,2,0,0,0,0,0,0,0,2,0,2,6,1,1
+site4_uneven,14,2,0,1,1,3,1,3,2,0,1,7,0,0,1,1,3,1,0,3,3,0,6,0,0,0,2,0,2,3,0,1,1,7,0,0,0,0,0,0,0,0,0,0,2,0,1,6,3,2
