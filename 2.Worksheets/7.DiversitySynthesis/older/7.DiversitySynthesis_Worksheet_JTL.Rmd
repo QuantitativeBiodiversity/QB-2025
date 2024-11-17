@@ -1,0 +1,147 @@
+---
+title: '7\. Worksheet: Diversity Synthesis'
+author: "Student Name; Z620: Quantitative Biodiversity, Indiana University"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: pdf_document
+geometry: margin=2.54cm
+---
+
+## OVERVIEW
+
+In this worksheet, you will conduct exercises that reinforce fundamental concepts of biodiversity.
+Specifically, you will construct a a site-by-species matrix by sampling confectionery taxa.
+With this primary data structure, you will then answer questions and generate figures using tools from previous weeks, along with wrangling techniques that we learned about in class. 
+
+## Directions:
+1. In the Markdown version of this document in your cloned repo, change "Student Name" on line 3 (above) to your name.
+2. Complete as much of the worksheet as possible during class.
+3. Refer to previous handout to help with developing of questions and writing of code.
+4. Answer questions in the worksheet.
+Space for your answer is provided in this document and indicated by the ">" character.
+If you need a second paragraph be sure to start the first line with ">".
+You should notice that the answer is highlighted in green by RStudio (color may vary if you changed the editor theme).
+5. Before you leave the classroom, **push** this file to your GitHub repo.
+6. For the assignment portion of the worksheet, follow the directions at the bottom of this file. 
+7. When you are done, **Knit** the text and code into a PDF file.
+8. After Knitting, submit the completed exercise by creating a **pull request** via GitHub.
+Your pull request should include this file `7.DiversitySynthesis_Worskheet.Rmd` and the PDF output of `Knitr` (`DiversitySynthesis_Worskheet.pdf`).
+
+
+## CONSTRUCT A SITE-BY-SPECIES MATRIX
+
+We will construct a site-by-species matrix using confectionery taxa (i.e, gummies). 
+The instructors have created distinct **sources communities** that vary in the composition of gummy taxa.
+Each student will sample a source community and then use a taxonomic key to identify gummies and their abundances. 
+Students will collate data and create a site-by-species matrix that will be shared via GitHub. 
+
+## SAMPLING PROTOCOL
+
+<!-- We don't know how many students we're going to have in class. So, it doesn't make sense to me to specify number of species pools or number of groups. Instead, I would leave this out, and then we can post groups on white board along with sample ID.   -->
+
+1. Instructors will assign you to sample confectionery taxa from a designated source community. 
+
+2. After randomly sampling 50 individuals, identify the taxa and quantify their abundances.  
+
+3. Work with other students to assemble data into site-by-species matrix (.csv or .txt file) and share via GitHub.
+
+<!-- I'm a little unclear on the rarefaction and the order of operations -->
+<!-- Do you want a student to just being doing this for their own sample? -->
+<!-- Or do you want them to analyze rarefaction curves for all students -->
+<!-- The latter sounds more complicated to organize and perhaps not super informative -->
+<!-- One idea is to: 1. have the build the site-by-spp matrix and get it onto Gituhb -->
+<!-- 2. have them hold onto their gummies and conduct a rarefaction curve -->
+<!-- In the handout we specify that rarefaction is done without replacement -->
+<!-- But when I looked into this more deeply, I think it can be done with or without-->
+<!-- I'm guessing here it would be done with replacement? -->
+<!-- Are we suggesting sampling 1, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50 individuals?  -->
+<!-- They can create their own data table for this and upload to GitHub for question 1 -->
+<!-- Revise text below based on commments above -->
+
+3. With the gummies you sampled, we will then generate data manually for a rarefaction curve to understand if we have sufficiently captured the source community.
+To do this, mix your gummy individuals.
+Then, sub-sample your gummy collection by selecting 5 individuals, count the number of species present, and put your gummies back into your mix.
+
+4. Repeat step 3 multiple times but increase the number of individuals subsamples by five until you have sampled your entire collection.
+
+5. Using Excel, make two spreadsheets that will serve as a site-by-species matrix and your rarefaction curve data. Make sure you include a sample identifier (student name) as well as what community you sampled from. One person should add this to their student repository and make a pull request. 
+
+6. Using the data, you will then explore topics of alpha and beta diversity based on the methods you have learned in the rest of the handout and accompanying worksheet. You will use different data wrangling tools explored in this handout to test a hypothesis to explain differences between source communities and sites using the hypothesis testing methods.
+
+
+
+## GROUP BRAINSTORM
+
+In smaller groups, take 15 minutes to brainstorm questions, code, statistical tests, and "fantasy figures" using the site-by-species matrix the class generated. 
+
+
+## 1) Sampling coverage and rarefaction curves
+
+**Question 1:** How do changes in community composition impact our ability to make inferences on the communities we sampled? 
+
+<!-- I'm not sure I understand this question. It's too vague.  -->
+<!-- This question is about rarefaction right?  -->
+<!-- Simplest thing to do is delete text above starting with "How do changes..." -->
+
+Use the space below to generate a rarefaction curve based on the data we collected in class for each community. Make sure to annotate your code using # symbols so others (including instructors) understand what you have done and why you have done it. 
+
+```{r}
+
+
+
+
+```
+
+**Answer 1:**
+
+
+## 2) Alpha diversity
+
+**Question 2:** Which alpha diversity measures can you use on your site-by-species matrix? (a) Provide at least two different measures. (b) Generate a hypothesis around the two metrics you chose and test your hypothesis. (c) Interpret your findings.
+
+<!-- For 2a, do we just want student to list two things, e.g., Sobs and ACE?  -->
+<!-- What would be an example of a good hypothesis? -->
+<!-- Are we trying to get them to explain why these metrics are different?-->
+<!-- For example the inclusion of rare species or not? -->
+<!-- I'm fine with keeping it open ended -->
+<!-- But I've also found as a college instructor that students interpret question literally -->
+<!-- They don't always "push" to think more deeply if not direclty asked -->
+
+**Answer 2a:**
+
+**Answer 2b:** Use the space below for code that is being used to analyze your data and test your hypotheses on your two chosen alpha diversity metrics. With your analysis, create one (and only one, although it can have multiple panels) *publication-quality* figure. Make sure to annotate your code using # symbols so others (including instructors) understand what you have done and why you have done it. 
+
+```{r}
+
+
+
+
+```
+
+**Answer 2c:** Write an informative yet succinct (~5 sentences) caption that creates a "stand-alone" figure. Take a peek at figures and figure captions in a paper published in your favorite journal for inspiration.
+
+
+## 3) Beta diversity
+
+**Question 3:** Which beta diversity analyses can you use on your site-by-species matrix? (a) Please provide at least two different analyses (b) Generate a hypothesis around your chosen analysis and test your hypothesis. (c) Interpret your findings.
+
+<!-- See comments above for alpha diversity in question 2 -->
+
+**Answer 3a:**
+
+**Answer 3b:** Use the space below for code that is being used to analyze your data and test your hypotheses on your two chosen beta diversity analyses. With your analysis, create one (and only one, although it can have multiple panels) *publication-quality* figure. Make sure to annotate your code using # symbols so others (including instructors) understand what you have done and why you have done it. 
+
+```{r}
+
+
+
+
+```
+
+**Answer 3c:** Write an informative yet succinct (~5 sentences) caption that creates a "stand-alone" figure. Take a peek at figures and figure captions in a paper published in your favorite journal for inspiration.
+
+
+## SUBMITTING YOUR ASSIGNMENT
+Use Knitr to create a PDF of your completed 7.DiversitySynthesis_Worksheet.Rmd document, push it to GitHub, and create a pull request.
+Please make sure your updated repo includes both the pdf and RMarkdown files.
+
+Unless otherwise noted, this assignment is due on **Wednesday, February 15^th^, 2023 at 12:00 PM (noon)**.
