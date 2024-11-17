@@ -1,0 +1,249 @@
+---
+title: '7\. Diversity Synthesis'
+author: 'Z620: Quantitative Biodiversity, Indiana University'
+header-includes:
+   - \usepackage{array}
+output: pdf_document
+geometry: margin=2.54cm
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## OVERVIEW
+
+So far in QB, we have introduced theory and applications of ($\alpha$) and ($\beta$) diversity to look at within- and among-sample biodiversity, respectively. At the same time, we have learned how to use R to process, analyze, and visualize data. In this handout, we will reflect and reinforce this foundation while introducing some new tools. Specifically, we will 1) empirically construct a site-by-species matrix, a primary data structure; 2) highlight data wrangling approaches, including control structures; and 3) explore simulation-based approaches for testing theories of biodiversity.
+
+<!-- If the handout doesn't deal with gummies, and instead, is only focused on wrangling and simulation... -->
+<!-- Then the overview statement should mention gummies or construction of site-by-species matrix-->
+<!-- Scanning below, it doesn't seem there is any reference to gummy data-->
+
+## DATA WRANGLING OVERVIEW
+
+Now that we have sampled our gummy communities and have generated data, let's actually analyze the data. 
+To show examples of ways to incorporate alpha and beta diversity analyzes with data wrangling, we will use simulated data to show ways to analyze gummy data collected.
+
+<!-- Do we want students to go through wrangling exercises with gummy data?-->
+<!-- This would require them to create and share site-by-species .csv file via GitHub-->
+<!-- and also do the rarefaction?-->
+
+### 1) DATA WRANGLING
+
+Much of the power of computing stems from the efficiency of performing small tasks in an iterative manner. 
+As part of this lesson, we will explore different ways of manipulating or "wrangling" data with the goal of making it easier to perform relevant statistics and generate figures. 
+Specifically, we will introduce traditional **control structures** (e.g., for loops and if-then statements), along with alternative and commonly used tools that are unique to the R statistical environment, such as `apply` functions and `tidyverse` packages. 
+We will learn about these tools while gaining exposure to R packages that allow us to simulate and sample biodiversity. 
+
+<!-- Simulation seems to come as as an afterthought-->
+<!-- Or something that we're doing just to assist with wrangling-->
+<!-- I think this undersells the value of simulation -->
+<!-- I would recommend highligting this separately-->
+
+### 2) SETUP
+#### A. Retrieve and set up your working directory
+
+<!-- fix the setwd directory-->
+```{r, results = 'hide'}
+rm(list=ls()) 
+getwd() 
+setwd("~/GitHub/QB-2021/1.Handouts/7.ControlStructures")
+```
+
+```{r}
+package.list <- c('mobsim','vegan','tidyverse','ggplot2','dplyr','broom')
+for (package in package.list) {
+  if (!require(package, character.only = TRUE, quietly = TRUE)) {
+    install.packages(package)
+  }
+  library(c(package), character.only = TRUE)
+}
+```
+
+<!-- Is this part of 2) SETUP?-->
+<!-- Make sure the ### corresponds to organization structure-->
+
+#### B. Simulating Biodiversity  
+
+To reinforce principles of alpha and beta diversity, we are going to use the `mobsim` package, which was designed for the simulation and measurement of biodiversity across spatial scales: https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.12986.
+The simulated individuals will mirror what we are doing in the above exercise with gummies.
+
+<!-- Again, it doesn't seem gummies need to be mentioned-->
+<!-- I guess it depends, but seems confusing right now-->
+
+Often, simulations are initiated by taking a random draw of individuals from a *source community*, which is intended to reflect the regional pool of species.
+
+<!-- consider defining source community and regional pool as this may not be familar to most-->
+<!-- refers to the species found throughout a landscape of sites-->
+<!-- can imagine it represents the abundance distribution of all sites-->
+
+In this way, the number of individuals (*N*) and species (*S*) can be specified so that we create **local communities** that we will then sample. 
+
+
+<!-- We now have five pound sizes?-->
+<!-- Reevaluate structural organizaiton-->
+##### Simulate source communitities with random spatial positions
+
+The following code simulates at containing 1000 individuals (*N*) belonging to 50 species (*S*). 
+
+<!-- typos/grammos above-->
+These individuals are drawn from source community with a log-normal *species abundance distribution (SAD)* with mean = 2 and standard deviation = 0 (even) and standard deviation = 1 (uneven) communities. 
+
+```{r}
+# simulate an even local community
+com1 <- sim_poisson_community(s_pool = 50, n_sim = 1000, sad_type = "lnorm", 
+        sad_coef = list("meanlog" = 2, "sdlog" = 0))
+
+# visualize the even local community
+plot(com1)
+
+# simulate an uneven local community
+com2 <- sim_poisson_community(s_pool = 50, n_sim = 1000, sad_type = "lnorm", 
+        sad_coef = list("meanlog" = 2, "sdlog" = 1))
+
+# visualize the uneven local community
+plot(com2)
+```
+
+#### C. Sample species diversity in the simulated community
+
+Using functions from the `mobsim` package, we can sample the communities using methods that are commonly used in the field. 
+For example, the `sample_quadrats` function allow us to collect plot-based samples from random, transect, or grid sampling techniques in a spatially explicit census. 
+From the communities we created above, we will now randomly sample four different non-overlapping quadrats with area size of 0.08, which represents the proportion of the area sampled in the local community we are interested in. 
+
+```{r}
+# Lay down sampling quadrants on your communities
+
+com_mat1 <- sample_quadrats(com1, n_quadrats = 4, quadrat_area = 0.08, 
+             method = "random", avoid_overlap = T)  
+
+
+com_mat2 <- sample_quadrats(com2, n_quadrats = 4, quadrat_area = 0.08, 
+             method = "random", avoid_overlap = T)  
+
+# Assess the species by site matrix generated automatically from our sampling efforts
+print(com_mat1$spec_dat)
+
+print(com_mat2$spec_dat)
+```
+
+#### D. Measure within sample diversity
+
+<!-- Do we mean alpha diversity? let's use that language which is what we've mostly been doing-->
+
+Remember the `vegan` package that we used to calculate diversity indices.
+Let us calculate "Shannon entropy" to practice data wrangling. 
+
+```{r}
+com1_div <- diversity(com_mat1$spec_dat, index = "invsimpson")
+print(com1_div)
+
+com2_div <- diversity(com_mat2$spec_dat, index = "invsimpson")
+print(com2_div)
+```
+
+
+##### Summarize diversity data with a for loop
+
+Now, we will use control structures, specifically, a for loop, to obtain diversity estimates across different source communities. 
+We will calculate the mean and standard error (SE) for each community.
+
+```{r}
+# write function for SE equation
+SE <- function(x) {
+  return(sd(x)/sqrt(length(x)))
+}
+
+# The following code binds the two vectors as columns in a data frame 
+com_div_all <- t(cbind.data.frame(com1_div, com2_div))
+
+# Create an empty data frame to fill with summary statistics
+com_div_sum <- as.data.frame(matrix(ncol = 2 , nrow = 2))
+colnames(com_div_sum) <- c("mean", 'se')
+
+# The following for loop will iteratively calculate the mean and standard error for each row, one at a time.
+for(i in 1:2) {
+  x = as.numeric(com_div_all[i,]) 
+  com_div_sum[i,1] <- mean(x) # Calculate the mean and save to diversity indices data
+  com_div_sum[i,2] <- SE(x)   # Calculate the standard error and save to diversity indices data
+}
+
+# Let's add a grouping column to the data
+com_div_sum$community <- c("even", "uneven")
+```
+
+Now let us plot mean and standard errors of Shannon entropy across the source communities. In QB, most plotting will be done in using **R base package**. 
+However, many people like visualizing their data using the package `ggplot2` package. 
+Let us use this package to graphically explore differences in diversity between different source communities.
+
+```{r}
+ggplot(data = com_div_sum, aes(x = community, y = mean))+
+  geom_point(size = 4)+
+  geom_errorbar(aes(ymin = mean-se, ymax = mean+se), width = 0.2)+
+  ylab("Mean inverse Simpson index")+
+  xlab("Source community")+
+  theme_bw()
+```
+
+##### Summarize diversity data with the `apply` function
+
+Although for loops and other control structures (e.g., while loops, if-then-else) are commonly used by computational biologists, they have some downsides.
+People argue that they lack clarity and can easily break.
+This can create confusion when the goal is for code to be robust and reproducible in collaborative projects. 
+Also, in R, control structures can be slow and inefficient. 
+Fortunately, there are some alternatives.
+Within the base R package, there is a family of **`apply`** functions. 
+They allow one to apply functions across rows and columns of matrices, lists, vectors, and data frames. 
+The structure of the `apply()` function differs from the for loop. 
+In fact, it can be done with a single line of code, but it  has a similar sort of logic. 
+First, you specify the data object of interest. 
+Second, you specify the margin that the function will operate upon (row = 1, column = 2, cell = 1:2). 
+Last, you specify the function to use, which can be a native, built-in function (e.g., `mean()`) or one that you have written yourself (e.g., `SE`)
+Run the following code and compare to findings generated with the for loop above:
+
+
+```{r}
+# if only interested in mean, can just write `mean` at end of function
+# for both mean and sem, here, we specify as follows:
+com_div_sum_apply <- apply(com_div_all, 1, FUN = function(x) {c(mean = mean(x[x>0]), SE = sd(x[x>0])/sqrt(length(x[x>0])))})
+print(com_div_sum_apply)
+```
+
+#### E. Measure between sample diversity
+<!-- "Beta diversity" instead-->
+
+In QB, we have introduced multivariate statistical approaches to compare biodiversity between samples. Here we will incorporate an ordination to measure the differences between communities with different levels of biodiversity.
+
+##### Wrangle data with `tidyverse`
+
+Another popular approach for data wrangling is **`tidyverse`**, which is a collection R packages.
+**`dplyr`** contains a set of functions that manipulates dataframes.
+**`tidyr`** allow one to pivot, nest, and separate data in various ways.
+And **`ggplot2`** is an alternative to plotting in base R that was designed to interface with `tidyverse`. 
+<!-- this seems redundant with above-->
+`tidyverse` uses the **pipe operator**, depicted as `%>%`, to string together a sequence of functions or operations. 
+Below, we will use the pipe operator in combination to `shape` and `summarize` our diversity data, before making a plot. 
+
+```{r}
+# Wrangle data to plot PCA results
+com_mat_tidy <- com_mat1$spec_dat %>% # identify data frame of interest
+    bind_rows(com_mat2$spec_dat) %>% # bind with another dataset
+    replace(is.na(.), 0) %>% # you can replace NAs with 0 abundance
+    mutate_if(is.integer, as.numeric) %>% # basic operations
+    prcomp(center = T, scale = T) %>% # run a pca
+    tidy('scores') %>% # this is a useful broom function
+    # to tidy model outputs as data frames
+    filter(PC<3) %>% # filter principle components above 2
+    pivot_wider(names_from = PC, values_from = value) %>%
+    # this converts the data to wide formate, opposite is pivot_longer
+    mutate(site = rep(c('1','2','3','4'), times=2)) %>%
+    # add a site column for plotting
+    mutate(community = rep(c('even', 'uneven'), each=4)) %>%
+    # add a community column for plotting
+    rename('PC1' = '1', 'PC2' = '2') %>% # you can rename variable names
+    select(community, site, PC1, PC2) 
+                
+# let's plot PCA results 
+ggplot(data = com_mat_tidy, aes(x = PC1, y = PC2, color = site, 
+    shape = community)) + geom_point(size = 5) + theme_bw()
+```  
