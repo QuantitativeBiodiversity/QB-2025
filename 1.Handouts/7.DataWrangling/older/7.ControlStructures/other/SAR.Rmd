@@ -1,0 +1,95 @@
+---
+title: "SAR"
+author: "John McMullen"
+date: "4/1/2021"
+output:
+  pdf_document: default
+editor_options:
+  chunk_output_type: console
+---
+1. What is the species area relationship (SAR) for the site we simulated?
+
+  1a. Generate a dense plant community with 100 species with 10,000 individuals. Use a log normal distribution with a mean = 2 and standard deviation = 1. 
+  
+  1b. We will sample the area range 0.001 to 0.99 (the quadrat size that is the equvialent of the entire area breaks, so we will need to manually insert this ourselves after running the code). Use a for loop to iterate over the sequence range. You will want to implement 1 quadrant randomly for each area size.
+  
+  1c. For each plot size, calculate the total area size sampled and the total richness. In addition to the calculations you make, add an additional row with the total number of species for the entire site. Use a for loop to perform the calculations.
+  
+  1d. Repeat questions 1c, but use an apply function.
+  
+  1e. Repeat question 1c, but use `tidyverse` methods.
+  
+  1f. Plot the species area relationship. Note you will need to do a natural log transformation for both axes.
+  
+  1g. Using the `lm` function calculate the slope for the species area relationship.
+  
+```{r}
+library(mobsim)
+library(vegan)
+com2 = sim_poisson_community(s_pool = 1000, n_sim = 100000, sad_type = "lnorm", 
+        sad_coef = list("meanlog" = 2, "sdlog" = 1))
+
+plot(com2)
+
+plot_size = seq(0.001,0.99,by=0.001)
+
+all_sizes = list()
+
+for (i in 1:length(plot_size)){
+    tmp <- sample_quadrats(com2,method="random",n_quadrats = 1,quadrat_area = plot_size[i],plot=FALSE)
+    name <- paste(plot_size[i])
+    all_sizes[[name]] <- tmp 
+}
+
+sar = matrix(ncol=2,nrow=990)
+
+for(i in 1:length(all_sizes)) {
+  tmp <- specnumber(all_sizes[[i]]$spec_dat)
+  sar[i,1] <- plot_size[i]
+  sar[i,2] <- tmp
+}
+colnames(sar) <- c("total_area","total_richness")
+plot(sar)
+plot(log(sar[,1]),log(sar[,2]))
+```
+  
+  
+#############
+##tried to use some grids but might be too hard to ask the students to do? I think the above is easier for them to compute.
+
+
+  1b. We will use a regular, noncontiguous **`grid`** approach to determine the species-area relationship within the plant community site. For this example you will need to generate 9 different plot area sizes ranging from 0.001 to 0.04. For each area size, you will need to perform 9 quadrants over the entire site (hint: use the following parameter with the `sample_quadrats` function to do this -> x0=0,y0=0,delta_x = 0.4,delta_y = 0.4). Use a for loop to comlete this task.
+```{r}
+plot_sizes = c(0.001,0.003,0.006,0.005,0.007, 0.01, 0.02, 0.03,0.04)
+all_sizes = list() #here we will make an empty list to save the data to as we generate it
+par(mfrow = c(3, 3))
+for (i in 1:length(plot_sizes)){
+    tmp <- sample_quadrats(com2, n_quadrats = 9, quadrat_area = plot_sizes[i], method = "grid",x0=0,y0=0,delta_x = 0.4,delta_y = 0.4, avoid_overlap = T) 
+    #quads <- c("quad1", "quad2", "quad3", "quad4", "quad5", "quad6")
+    #row.names(tmp$xy_dat) <- quads
+    #row.names(tmp$spec_dat) <- quads
+    name <- paste(plot_sizes[i])
+    all_sizes[[name]] <- tmp 
+}
+plot.new()
+
+sar = matrix(ncol=2,nrow=10)
+colnames(sar) <- c("total_area","total_richness")
+
+for(i in 1:9) {
+  sar[i,1] <- plot_sizes[i] *9
+  x=colSums(all_sizes[[i]]$spec_dat)
+  sar[i,2] <- specnumber(x)
+}
+
+sar[10,1] <-1
+sar[10,2] <-100
+```
+
+```{r}
+plot(sar)
+
+plot(log(sar[,1]),log(sar[,2]))
+
+summary(lm(data=as.data.frame(sar),log(total_richness) ~ log(total_area)))
+```

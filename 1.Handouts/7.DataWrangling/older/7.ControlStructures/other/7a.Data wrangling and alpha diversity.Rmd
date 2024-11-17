@@ -1,0 +1,323 @@
+---
+title: '7a\. Data wrangling with simulated communitites'
+author: 'Z620: Quantitative Biodiversity, Indiana University'
+header-includes:
+   - \usepackage{array}
+output: pdf_document
+geometry: margin=2.54cm
+---
+
+## OVERVIEW
+
+Much of the power of computing stems from the efficiency of computers in performing small tasks in an iterative manner. 
+In this lesson, we will explore different ways of manipulating or "wrangling" data with the goal of making it easier to perform relevant statistics and generate figures. 
+Specifically, we will introduce traditional **control structures** (e.g., for loops), along with alternative and commonly used tools that are unique to the R statistical environment, such as `apply` functions and `tidyverse` packages. 
+We will learn about these tools while also gaining exposure to R packages that allow us to simulate and sample biodiversity. 
+
+## 1) SETUP
+### A. Retrieve and set your working directory
+
+```{r, results = 'hide'}
+rm(list=ls()) 
+getwd() 
+setwd("~/GitHub/QB-2019/1.Handouts/7.ControlStructures")
+```
+
+## 2) SIMULATE BIODIVERSITY 
+
+To reinforce principles of alpha diversity, we are going to use the `mobsim` package, which was designed for the simulation and measurement of biodiversity across spatial scales: https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.12986.
+Simulation is an important and powerful tool.
+It allows us to produce null models, generate hypotheses, and challenge our intuition about how the world works.  
+In the context of biodiversity, simulations are often initiated by randomly drawing individuals from a *source community*, which is intended to reflect the regional pool of species.
+In this way, we can build **local communities** while controlling for the number of individuals (*N*) and species (*S*) that we will then sample.
+Let's start by loading the `mobsim` package:
+
+```{r message=FALSE}
+#install.packages("mobsim")
+library("mobsim")
+```
+
+### A. Simulate source community with random spatial positions
+
+Imagine that we want to characterize the diversity of plant community in an old-field grassland. 
+The site contains 1000 individual plants (*N*) belonging to 25 species (*S*). 
+The individuals in this site will be assembled from a source community that has a log-normal *species abundance distribution (SAD)* with mean = 2 and standard deviation = 1. 
+
+```{r}
+# simulate community with `mobsim`
+com1 <- sim_poisson_community(s_pool = 25, n_sim = 1000, sad_type = "lnorm", 
+        sad_coef = list("meanlog" = 2, "sdlog" = 1))
+
+# visualize site
+plot(com1)
+```
+
+### B. Sample the simulated community
+
+In the alpha diversity handout, we emphasized the importance of **sampling effort** and **coverage** when trying to accurately estimate biodiversity.
+In only a few cases do biologists fully census all individuals, even in relatively simple and tractable systems. 
+As a result, plant ecologists will often survey a subset of a site using grids, transects, or quadrats. 
+Here, we will used the `sample_quadrants` function to collect individuals from the simulated site. 
+Specifically, we will randomly sample 10 different quadrants, each with area size of 0.01 units. 
+
+```{r}
+# Lay down sampling quadrats on your community 
+comm_mat1 <- sample_quadrats(com1, n_quadrats = 10, quadrat_area = 0.01, 
+             method = "random", avoid_overlap = T)  
+
+# Rename sampled areas as quadrants
+quads <- c("quad1", "quad2", "quad3", "quad4", "quad5", "quad6", "quad7",
+           "quad8", "quad9", "quad10")
+row.names(comm_mat1$xy_dat) <- quads
+row.names(comm_mat1$spec_dat) <- quads
+
+# Assess the species by quadrat matrix generated automatically from our sampling efforts
+print(comm_mat1$spec_dat)
+```
+
+Let's quickly take a look at the rank-abundance curve (RAC) of our plant community using the `rad` function from the `vegan` package: 
+
+```{r, results='hide', message=FALSE, warning=FALSE, fig.width = 5, fig.height = 3.5, fig.align='center'}
+# load package
+library("vegan")
+
+# Fit log-normal model to the quadrat-sampled data
+RACresults <- rad.lognormal(comm_mat1$spec_dat) 
+
+# Print parameters for log-normal fit
+print(RACresults)
+
+# Plot log-normal fit to quadrat-sampled data
+plot(RACresults, las = 1, cex.lab = 1.4, cex.axis = 1.25, lty = 2, lwd = 2)
+```
+
+### C. Quantify diversity of simulated community
+
+Now, we will calculate richness, Shannon's diversity, and inverse Simpson's diversity for each of the 10 quadrats.
+With this, we will create a data frame that summarizes the diversity measures. 
+We will create some extra columns that will be populated with environmental data to come.
+
+```{r}
+# Create an empty data frame
+comm_mat1_diversity <- as.data.frame(matrix(ncol = 3, nrow = 10))
+
+# Add column and row names
+colnames(comm_mat1_diversity) <- c('richness','shannon','invsimpson')
+rownames(comm_mat1_diversity) <- rownames(comm_mat1$spec_dat)
+
+# Fill data frame with diversity measures using `vegan` functions
+comm_mat1_diversity[,1] <- specnumber(comm_mat1$spec_dat)[1:10]
+comm_mat1_diversity[,2] <- diversity(comm_mat1$spec_dat, index = "shannon")[1:10]
+comm_mat1_diversity[,3] <- diversity(comm_mat1$spec_dat, index = "invsimpson")[1:10]
+```
+
+******* Should this stay or go? **************
+## D. Simulate environment
+
+Biodiversity is influenced by local and regional processes. 
+At the regional scale, researchers tend to think about dispersal limitation or the legacy of historical events (e.g., glaciers).
+At the local scale, researchers might think about stochastic processes, like random births and deaths.
+But biodiversity can also be influenced at the local scale by deterministic factors, such as biotic interactions (e.g., competition and predation), or environmental conditions.
+Here, we are going to assign different environmental conditions to the site`com1`. 
+We will do this use the `sample` function. 
+When we use the 'replace = FALSE' argument, moisture will be randomly and equally assigned to the 10 quadrats. 
+
+```{r}
+# create vector of moisture conditions
+# soil_type <- c(rep('dry', 5), rep('wet', 5))
+
+# randomly assign moisture condition to quadrats
+# comm_mat1_diversity[,4] <- sample(soil_type, 10, replace = FALSE)
+
+# Rename soil column 
+# colnames(comm_mat1_diversity)[4] <- "soil"
+```
+***********************************************
+
+
+## 2) WRANGLING SIMULATED DATA
+
+A major hurdle in data science and quantitative biology is learning how to efficiently and reproducibly "wrangle" large date sets. 
+This might involve converting you entries from long to wide formats, or subsetting a data matrix based on the values of a certain column. 
+Or, maybe you want to summarize a dataset by applying a function across rows of your matrix. 
+These types of operations are fairly standard when taking classes in programming or computer science, but are less commonly taught in biology curricula.
+
+
+### A. Summarize diversity data with a foor loop
+
+In this section, we will introduce to some of the basics of **control structures**.
+Specifically, we will focus on using **for loops**. 
+For loops have two parts. 
+First, the header assigns a counter or *index* for the variables that will be acted upon. 
+Second, the body contains instructions or operations that will be performed during each iteration.
+Let's write a for loop to summarize (mean \pm standard error) for diversity estimates in our sampled quadrats:
+
+```{r}
+# function for standard error of the mean (sem)
+sem <- function(x) {
+  return(sd(x)/sqrt(length(x)))
+}
+
+# loop to calculate the mean and sem for each row (quadrat), one at a time.
+for(i in 1:10) {
+  x = as.numeric(comm_mat1$spec_dat[i,]) # Each row subset from the species x quadrat 
+  x = x[x > 0] # ignore taxa we not sampled at each site
+  comm_mat1_diversity[i,4] <- mean(x) # calculate mean and save 
+  comm_mat1_diversity[i,5] <- sem(x) # calculate sem and save
+}
+
+# Rename columns
+colnames(comm_mat1_diversity)[4:5] <- c('mean_sp','se_sp')
+
+print(comm_mat1_diversity)
+```
+
+
+### B. Summarize diversity data with "tidyverse"
+
+Although for loops and other control structures (e.g., while loops, if-then) are commonly used by computational biologists, there are some downsides.
+People argue that they lack clarity.
+This can create confusion when the goal is for code to be robust and reproducible in collaborative projects. 
+Also, in R, control structures can be slow and inefficient. 
+Fortunately, there are some alternatives, that we'll introduce. 
+A very popular tool for data wrangling is called **`tidyverse`**, which is a collection R packages.
+**`dplyr`** contains a set of functions that manipulate data frames
+**`tidyr`** allow one to pivot, nest, and separate data.
+And **`ggplot2`** is an alternative to plotting in base R that was designed to interface with tidyverse.    
+
+
+Let's start by loading the package:
+
+```{r message=FALSE}
+#install.packages(c("tidyr","ggplot2","dplyr))
+library("tidyr")
+library("dplyr")
+library("ggplot2")
+```
+
+In the following code, we will process our quadrat data in a similar way to what we did above with for loops. 
+`tidyverse` uses the **pipe operator**, which is used for stringing together a sequence of functions or operations. 
+Below, we will use the pipe operator in combination to `shape` and `summarize` our diversity data:
+
+In the example below, we "shape" and "summarize" the data using `tidyverse`:
+
+```{r}
+# wrangle data
+comm_mat1_tidy <- comm_mat1_diversity %>% # identify data frame of interest
+  select(richness, shannon, invsimpson) %>% # select columns of interest
+  pivot_longer(cols = c(richness, shannon, invsimpson), 
+               names_to = "indices", values_to = "value" )  %>% # convert to long format
+  group_by(indices) %>% # group according to these factors
+  summarise(mean = mean(value), sd = sd(value)) # calculate mean and sem
+
+********* soil moisture has been removed in this version, which affects plotting....I'll let you figure this out....**************
+# plot data
+ggplot(comm_mat1_tidy, aes(x = soil, y = mean, color = soil))+ # First we create an empty plot with the information of what is going to be x and y axis. Using "+" we can layer all the plot features we want. We can also define the grouping factors, which help us to plot different levels with different colors and shapes.
+  geom_point(size = 3) + # we choose the plot type (e.g points, lines, boxplots)+
+  geom_errorbar(aes(ymin = mean+sd, ymax = mean-sd), width=0.2)+ #Here we plot the error bars 
+  labs(x = "Soil type", y = "Richness and diversity")+ #relabel the titles of each axis
+  facet_wrap(~indices, scales = "free")+ # This option helps us to plot different factor levels in different panels.
+  theme_bw()+ #Themes are a way to modify the plots so that they can become publication ready plots. You can also save your prefrences and re-use them later.
+  scale_color_manual(values = c("#999999", "#E69F00")) #You can choose different color palettes if you do not want to use the standard colors in ggplot2.
+```  
+  
+  
+  
+  
+  
+  
+  
+  
+## C. Apply different control structures to test several different sampling strategies
+How does quadrant sampling strategy influence the number of species we detect per quadrant? We will use a for loop to apply several different sampling strategies and plot the data we collect using ggplot2.
+
+In this example, we will highlight how we can combine all of the strategies we've learned to wrangle our data.
+
+```{r}
+#FOR LOOP EXAMPLE 
+#Effect of plot size on the detection of number of individuals; using a for loop we will run the same function but we will modify the quadrant size for sampling. By specificying the delta_x and delta_y, this will ensure that we are sampling at the same sites, which allows us to compare the sampling strategy in the same area of our local plant community. 
+plot_sizes = c(0.006, 0.008, 0.01, 0.02, 0.04)
+all_sizes = list() #here we will make an empty list to save the data to as we generate it
+par(mfrow = c(2, 3))
+for (i in 1:length(plot_sizes)){
+    tmp <- sample_quadrats(com1, n_quadrats = 6, quadrat_area = plot_sizes[i], method = "grid", delta_x = 0.25 , delta_y = 0.25, x0 = 0.2, y0 = 0.2, avoid_overlap = T) 
+    name <- paste(plot_sizes[i])
+    all_sizes[[name]] <- tmp 
+}
+
+#############
+
+#APPLY EXAMPLE 
+
+# calculate species richness from the list of sampling simulations with different plot sizes
+num_species_found <- sapply(all_sizes, function(x) lapply(specnumber(x$spec_dat), mean))
+# we have apply a function in a data set (species-site matrix) nested within a list (different plot sizes). There are different apply functions for different purposes. While  "lapply" creates a list as an output "sapply" allows us to create a matrix from the list.
+
+num_species_found <- as.data.frame(num_species_found) #converting the matrix to a dataframe will make it easier to tidy and plot
+
+print(num_species_found)
+
+#############
+
+#TIDYVERSE EXAMPLE 
+
+#Let's tidy this data set for the plot
+num_species_tidy <-  num_species_found %>%
+   mutate(site = rownames(num_species_found)) %>% # here we add the sites as a new column 
+   gather("size", "richness", -site) # another function to trasform the table format
+
+print(num_species_tidy)
+
+#Plot the data using ggplot
+ggplot(num_species_tidy, aes(x = as.numeric(size), y = as.numeric(richness), color = site))+ #here we are staging the data to indicate which columns are the x and y variables for plotting, and this time we will include another modifier `color`, which will allow us to code the points by color according to the site they originated from.
+  geom_hline(yintercept = 25, linetype = "dashed")+ #total number of species we know from our simulation
+    geom_point()+ #add points for each xy coordinate
+    geom_line()+ #link all the points with a line
+    labs (y = "Species found", x = "Plot size")+ #re label the x and y axis titles
+    theme_bw()
+```
+
+## Test your knowledge of alpha diversity by simulating communities that vary in their spatial structure, complexity, and composition. 
+
+In the following questions, we will compare our reslts to the `com1` generated fromt the examples above. This will allow us to 1) compare how alpha diversity indices vary depending on the spatial patterns of the two different local plant communities and 2) utilize the the three different data wrangling methods learned above (i.e. for loop, `apply` functions, and `tidyverse` package).
+
+1. How would diversity description change if individuals are more clumped in space? Tip: mobsim package has a function, `sim_thomas_community`, to simulate species clumped in space. 
+
+1a. Generate plant community using the sim_thomas_community function and randomly sample 10 quadrats of 0.01 area and plot the sampling effort. You can apply the same parameters as in `com1` to determine how a patchy distribution influences diversity measures. Specifically, for the next three questions, identify a single alpha diversity statistic that you would like assess for changes. Given that you can do this easily without control strucutre with the `vegan` package, you can easily check to make sure that you obtained the correct results.
+
+1b. Using a for loop, like in the example above, survey the plant community for a single alpha diversity statistic.
+
+1c. Repeat 1b, but use an `apply` function.
+
+1d. Repear 1c, but use `dplyr` package. You may find the functions `rowwise` and `summarise` to be useful.
+
+1e. Using `ggplot2`, plot your results using one of the data frames generated in 1b to 1d to compare `com2` data with `com1` data to plot the mean and standard error for the alpha diversity statistics of your choice. You may find that you will need to add a new column to identify which community your data comes from before combining the data and plotting it. You can use the `dplyr::mutate` function to label each row with their community id, and then combine the two data frames with `rbind`. You will need to use a data wrangling method of your choice to calculate the mean and standard error.
+
+Note: the usage of double colons is a common way to denote the package of a function. 
+
+1f. What did you learn from your plot? How does changing the spatial spread of the plant community influence the mean and variance of the alpha diversity index?
+
+2. How would alpha diversity change with species complexity (number of species simulated), or changes in number of individuals? Make a prediction to determine the changes you predict to see in how changing one of these conditions in your communities will influence richness and Shannon's diversity indices.
+
+2a. Generate two communities using the `sim_poisson_community` function with a log normal distribution with mean = 3 and standard deviation = 1. Modify either `s_pool` or `n_sim` in the two different plant communities.
+
+2b. Use a transect sampling approach for each community and plot the sampling effort to measure 10 quandrants at size 0.01.
+
+2c. Using a for loop, sample richness and Shannon's diversity for each plant community.
+
+2c. Repeat 2c, but use an `apply` function.
+
+2d. Repear 2c, but use `dplyr` package.
+
+2e. Use `ggplot2` to plot the results of your data. Specifically, display the mean and standard error for each index. Use a different data wrangling method that what you did in 1e to caluclate the mean and standard error. You may find that if have your data is in long format, you can easily implement `facet_wrap` to generate two panels to compare differences by indcies between the two communities. You can use the `melt` function in `dplyr` to easily convert your data.
+
+2f. Based on your sampling efforts and plot, did your results meet your predict? Please explain.
+
+
+
+## Additional resources
+
+As you begin to incorporate more of these elements into your data analyses, you will find that googling will become your friend. In addition to some of the resouces provided in handout 7 and the lecture, we have included the following links that might help you to understand control structures, and also discover more data wrangling and plotting options:
+
+https://bookdown.org/rdpeng/rprogdatascience/
+https://r4ds.had.co.nz/
