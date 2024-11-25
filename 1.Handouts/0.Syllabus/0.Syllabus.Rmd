@@ -44,7 +44,7 @@ Dr. Jipeng Luo<br>
 In this course, we will be using [R](http://www.r-project.org/) and [GitHub](https://github.com/) as complementary tools for learning quantitative biodiversity. R is a free, open-source programming language that is widely used for data visualization and statistics. Specifically, [RStudio](http://www.rstudio.com/) is an integrated development environment (IDE) that will allow us to interface with other packages, including [Markdown](http://en.wikipedia.org/wiki/Markdown) and [LaTeX](http://www.latex-project.org/). Last, we will be using GitHub as a version control system to track, record, and recover changes throughout the history of a project. 
 GitHub is the premier tool for collaborative and social development of computing-based projects, allowing instructors, students, and collaborators to develop a project (or class) from remote locations. We will use [GitHub](https://github.com/) to host course material including this syllabus, code, and exercises. Each student will have their own GitHub repository and will use GitHub to store and submit their work.
 
-### Other courserResources
+### Other course resources
 PDF versions of required papers, along with slides from class lectures can be posted on the IU's learning management system, [Canvas](https://canvas.iu.edu/). 
 
 ### Learning objectives
