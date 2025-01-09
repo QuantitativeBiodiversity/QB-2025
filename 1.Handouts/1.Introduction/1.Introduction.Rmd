@@ -9,7 +9,7 @@ geometry: margin=2.54cm
 
 In this pre-class exercise, you will be introduced to the computational tools that we will be using in Quantitative Biodiversity (QB).
 By the end of this exercise you will understand the basics of version control and how it is implemented using Git and GitHub, along with basic Linux commands. 
-Last, you will become acquainted with the data analysis language R and the R-based development environment RStudio. 
+Last, you will become acquainted with the data analysis language R and the R-based development environment RStudio through a cloud-based platform that we will also be using in the classroom.
 You will learn how to perform basic statistics and operations on data structures such as vectors. 
 
 ***  
@@ -76,6 +76,7 @@ As mentioned above, version control using Git and GitHub will require that you b
 + Read "Introduction to the UNIX Operating System"
 + Take "Tutorial One" and "Tutorial Two"
 
+
 ***
 
 ## 2) LEVERAGING R FOR REPRODUCIBLE SCIENCE
@@ -94,16 +95,23 @@ For example, when you click the "Knit PDF" button in the scripting window of RSt
 However, if there are errors in the Rcode in your Markdown document, you will not be able to knit a PDF file. 
 All assignments in this class require that you successfully create a Markdown-generated PDF using knitr; you will then **push** this document to the course **repository** hosted on GitHub (<https://github.com/QBstudents>) and generate a **pull request** for instructors. 
 
-### Introduction to RStudio
 
-Soon, we will make sure that your personal computer is set up with the proper versions of all necessary software. 
-But for now, we are going to become familiar with a web-based version of RStudio that does not require an installation. 
-Open a web browser and type the following into the address bar: <https://storefront.iuanyware.iu.edu>.
-Log in to the storefront using your IU username and passphrase, and then click `Log On`. Complete a Two-Step Login using the Duo option of your choice.
-When the storefront appears, select the APPS tab on the top of the page. 
-Once in the APPS tab use the search window in the top right corner to search for RStudio and click on the RStudio logo to launch the program.
+### An introduction to RStudio with Posit.cloud
 
-Finally, to obtain the complete layout of the RStudio integrated development environment (IDE) we will open the script editor from the File menu on the top left corner:
+To facilitate the integration of computing tools and foster reproducibility, we are going to use a **cloud version** of Rstudio called Posit.cloud (https://posit.cloud). 
+Posit.cloud provides a uniform RStudio environment accessible from any computer, which reduces inconsistencies in code and performance. 
+For example, regardless of how old your computer is or what operating system it has (Mac, Windows, Linux), Posit.cloud can run code and generate the same output. 
+
+#### Assignment 4: Create a Posit.cloud account
+
++ Navigate to <https://posit.cloud> and click on the "sign up" icon
++ Step 1: Select "Learn More" about the **Free** Plan ($0/forever) and sign up for it
++ Step 2: supply a username, your email address, and a password
+
+
+Now that you are logged into Posit.cloud, you can go to the page called "Your Workspace", which should currently be empty. In the right hand corner, there is a button called "New Project." Click and select the dropdown "New RStudio Project." A new project should appear with RStudio as an isolated environment. Note that any modification that you make (e.g., file created or package installed) will be saved within this project and will not be lost when you exit. However, the contents are *only accessible when the project itself is open* in Posit.Cloud. This means that if you create additional New RStudio Projects, each one will be a clean slate.
+
+Once RStudio in Posit.cloud has loaded, open the script editor from the File menu on the top left corner:
 `File > New File > R script.`
 
 Now, we are going to do some simple exercises to get you familiar with how to use R and RStudio.
