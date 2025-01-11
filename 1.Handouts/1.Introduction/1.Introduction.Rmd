@@ -103,16 +103,20 @@ Posit.cloud provides a uniform RStudio environment accessible from any computer,
 For example, regardless of how old your computer is or what operating system it has (Mac, Windows, Linux), Posit.cloud can run code and generate the same output. 
 
 #### Assignment 4: Create a Posit.cloud account
-
 + Navigate to <https://posit.cloud> and click on the "sign up" icon
 + Step 1: Select "Learn More" about the **Free** Plan ($0/forever) and sign up for it
 + Step 2: supply a username, your email address, and a password
++ Step 3: Log in to Posit.cloud and navigate to the page called "Your Workspace", which should be empty.
++ Step 4: Click the button "New Project" (in the right hand corner) and select the dropdown "New RStudio Project." 
 
+Note that every "Project" in Posit.cloud is self-contained. 
+That means project contents are *only accessible when the project itself is open* in Posit.Cloud. 
+Any modification that you make in a project (e.g., file created or package installed) are saved within that project, but all new projects created (ex: "New RStudio Project") are separate clean slates.
 
-Now that you are logged into Posit.cloud, you can go to the page called "Your Workspace", which should currently be empty. In the right hand corner, there is a button called "New Project." Click and select the dropdown "New RStudio Project." A new project should appear with RStudio as an isolated environment. Note that any modification that you make (e.g., file created or package installed) will be saved within this project and will not be lost when you exit. However, the contents are *only accessible when the project itself is open* in Posit.Cloud. This means that if you create additional New RStudio Projects, each one will be a clean slate.
-
-Once RStudio in Posit.cloud has loaded, open the script editor from the File menu on the top left corner:
++ Step 5: Once RStudio in Posit.cloud has loaded, open the script editor from the File menu on the top left corner:
 `File > New File > R script.`
+
+### RStudio exercises
 
 Now, we are going to do some simple exercises to get you familiar with how to use R and RStudio.
 There are many on-line resources (websites, videos, etc.) that can provide additional background and instruction.
