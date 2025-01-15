@@ -31,18 +31,24 @@ The following command will return your current working directory:
 getwd()
 ```
 
-Use the following command to change your directory (but note that you will need to modify to reflect _your_ actual directory):
+Use the following command to change your directory (but note that you will need to modify to reflect _your_ actual directory). 
+If you are working in Posit.cloud, you type the following into the the console (without # sign):
+
+```{r}
+#setwd("/cloud/project")
+```
+
+If you are working on your personal computer without Posit.cloud, you might change your working directory to something that looks like this, which would reflect where your GitHub files are being locally kept:
 
 ```{r}
 setwd("~/GitHub/QB-2025/1.HandOuts/3.RStudio")
-#setwd("/cloud/project")
 ```
 
 ## 2) WORKING WITH MATRICES
 
 **Matrices** are another data type in R. 
 They are just two-dimensional vectors containing data of the same type (e.g., numeric, integer, character). 
-Therefore, much of what we discussed in Week 0 about vectors translates directly into dealing with matrices. 
+Therefore, much of what we discussed in the pre-class exercise (Week 0) about vectors translates directly into dealing with matrices. 
 
 ### A. Making A Matrix
 
@@ -87,7 +93,7 @@ m <- as.matrix(read.table("data/matrix.txt", sep = "\t", header = FALSE))
 
 In this case, we are reading in a tab-delimited file. 
 The name of your file must be in quotes, and you need to specify that it is a tab-delimited file type using the `sep` argument. 
-The `header` argument tells R whether or not the names of the variables are contained in the first line; in the current example, they are not. 
+The `header` argument tells R whether or not the names of the variables are contained in the first line (row); in the current example, they are not. 
 
 Often, when handling and manipulating datasets, we want to be able to **transpose** a matrix. 
 This is an easy operation in R that uses the `t()` function:
@@ -130,7 +136,7 @@ In the following exercise, we will use a dataset from Lennon et al. (2003) (http
 Inorganic nitrogen and phosphorus were added to 300-L mesocosms for six weeks at three different levels (low, medium, and high), but we also directly measured nutrient concentrations of water samples. 
 So we have **categorical** and **continuous** predictors that we are going to use to help explain variation in zooplankton biomass.  
 
-The first thing we're going to do is load the nutrient data:
+The first thing we are going to do is load the nutrient data:
 
 ```{r}
 meso <- read.table("data/zoop_nuts.txt", sep = "\t", header = TRUE)
@@ -190,7 +196,7 @@ cor1 <- cor(meso.num)
 
 ### C. Loading Contributed Packages
 The base package in R will not always meet all of our wants and needs. 
-This is why there are > 19,000 **contributed packages** that have been developed for R. 
+This is why there are > 20,000 **contributed packages** that have been developed for R. 
 This may seem overwhelming, but it also means that there are tools (and web support) for just about any problem you might encounter.  
 
 When using one of the contributed packages, the first thing we need to do is **install** them along with their dependencies (i.e., other required packages). 
