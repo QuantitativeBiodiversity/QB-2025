@@ -14,49 +14,45 @@ geometry: margin = 2.54cm
 ## OVERVIEW
 
 During QB, you will have access to a dedicated Mac desktop computer that is physically located in Fine Arts 004. 
-Installed on this lab computer is all the software required for the course.
-In addition to using this during class period, you can access this lab computer using a Remote Desktop connection (see bullet 9 below)
+On your classroom computer, you will be able to access a **cloud version** of RStudio (https://posit.cloud). 
+Not only is the cloud version of RStudio accessible anywhere, it also comes with Git pre-installed. 
 You will use Git and GitHub on the lab computer to access and record changes to QB **worksheets** that contain in-class **exercises** and **assignments** that will eventually be submitted via Github.
-The following instructions will show you how to configure github on a computer (lab or personal).
-After that, you will learn how to **fork** and **clone** a GitHub repository. 
-Finally, you will learn how to **commit** and **push** changes so that you can access them later on your personal computer using **fetch** and **merge** commands.  
+Today, you will learn how to **fork** and **clone** a GitHub repository. 
+Finally, you will learn how to **commit** and **push** changes so that you can access them later using **fetch** and **merge** commands.
+In QB, you will submit work to instructors for evalution by making a **pull request**.
 
 ***
 
-## 1) Git Test
-Before we get started with Git, we first need to test our current installation to make sure there are not any issues.
-The easiest way to do this is to determine what Git version is currently installed.
-We will use **Terminal** 
+## Using Git on Posit Cloud
 
-On the lab computers, you can find terminal in one of two ways. 
-First, you can search for terminal with spotlight [Cmd+Space]. 
-Second, you can navigate to **Utilities Folder** in Finder.
-You may want to drag Terminal to the **Dock** at the bottom of your screen, as you will frequently be using this program.
+## 1) Join the QB-2025 Workspace on Posit 
 
-1. Find Terminal and open a new window
-2. After you have opened a new Terminal window (Shell > New Window), type the following commands, which will print your current working directory (pwd), list folders in your working directory (ls), and supply the version of installed git.
+1. Sign in to your free Posit.cloud (https://posit.cloud/plans/free) account
+2. On Slack and Canvas, we will provide you with an invitation you to join the QB-2025 Workspace 
+Click this link and accept the invitation
+3. After successfully joining, you should see in the left navigation bar, under **Spaces*, both *Your Workspace* and *QB-2025*
+Navigate to the *QB-2025* space by clicking it. 
 
-    ```sh
-    pwd
-    ls
-    git --version
-    ```
 
-## 2) Git User Configuration
-1. **Organization:** We recommend that you create a folder in your user directory called '*GitHub*' to make this and future assignments easier to manage. 
-In the following code, you will move to your user directory using the `cd` (change directory) function.
-The *slashdot* (./) specifies your current directory (../ would specify the directory above your current directory) and you will make a new directory with `mkdir` function. 
+The difference between *Your Workspace* and the *QB-2025 Workspace* lies in the available computational resources. 
+When using a free Posit.cloud account (e.g.,: *Your Workspace*), memory is limited to 1 GB RAM. 
+Some of the code we will execute in QB requires more. 
+In the *QB-2025 Workspace*, you will be allocated additional RAM to support the completion of your assignments.
 
-    ```sh
-    cd ~
-    mkdir ./GitHub
-    cd ./GitHub
-    pwd
-    ```
-    
-2. **User Configuration:** You will need to configure your local Git installation.
-You will do this by entering your name and email. 
-You will also set two parameters: push.default and credential.helper
+Please note that while files in *Your Workspace* are private and associated with your free account, instructors can view all projects created in the QB-2025 Workspace. 
+This is because we serve as the administrators of "QB-2025," and privacy settings do not apply in this shared environment.
+Last, because our Posit Cloud subscription is proportional to usage, we ask that you only use the QB-2025 Workspace for class-related work. 
+
+## 2) Create an empty R project & prepare Git
+
+1. In the *QB-2025 Workspace*, click the upper right button that says New Project. Select "New RStudio Project", which will create an empty project.
+Name this project "QB2025_Lastname" (e.g., QB2025_Smith).
+
+2. The default setting of all new projects is "Private." 
+Please keep projects private so **only you have editing capabilities**. 
+Assignments will still be published publicly via Git, so this is entirely to protect students from accidentally opening and changing the wrong assignment unknowingly, since Posit.Cloud autosaves! 
+
+3. While Git comes pre-installed with Posit Cloud, we are going to make a few changes to the default configuration:
 
     ```sh
     git config --global user.name "John Doe"
@@ -64,37 +60,18 @@ You will also set two parameters: push.default and credential.helper
     git config --global push.default simple
     git config --global credential.helper store
     git config --global core.editor "nano"
+    git config --global core.autocrlf input 
     ```
     
-3. The last thing you need to do is configure how Git handles line endings.
-Line endings are invisible characters that your operating system places at the end of each line in a document.
-On Unix machines (e.g., Mac), this is the linefeed character (LF).
-On Windows machines, this is the carriage-return (CR) and linefeed (LF) characters.
-This difference in line endings between Mac and Windows causes incompatibilities between the two systems.
-However, Git is equipped to handle the differences by silently converting line endings when repositories are pushed to remote servers.
-We *strongly* urge that you configure this behavior in order to prevent any future issues (i.e., conflicts) when collaborating across computer platforms.
-
-    **On Mac**
-
-    ```sh
-    git config --global core.autocrlf input
-    ```
-
-    **On Windows**
-
-    ```sh
-    git config --global core.autocrlf true
-    ```    
-    
-**You are now ready to** ***Git !!!***
-
-## 3) Create User
+## 3) Open your Git Account
 1. Navigate to https://github.com
 2. Sign in with your Username and Passphrase
 3. On the top right of your screen, click on your Username
 4. Click on the Edit Profile Icon to edit your profile<br>
 
     \includegraphics[height=0.75cm]{images/github_edit_btn.png}
+
+**You are now ready to** ***Git !!!***
 
 ## 4) Fork and Clone a Repo
 1. Navigate to the QB student organization: https://github.com/QBstudents
@@ -104,20 +81,19 @@ We *strongly* urge that you configure this behavior in order to prevent any futu
     \includegraphics[width=2cm]{images/github_fork_btn.png}
 
     You should now see the repo on your GitHub page.
-
-4. Clone the repo onto your local machine using the command line (Terminal).
-Replace "username" with your GitHub username and "repo" with the name of the repo in the QBstudent organization (e.g., QB2023_Smith)
+  
+4. Clone the repo into your empty RStudio project (named "Github") using the command line (Terminal).
+Replace "username" with your GitHub username and "repo" with the name of the repo in the QBstudent organization (e.g., QB2025_Smith)
 
     ```sh
-    cd ~/GitHub
     git clone https://github.com/username/repo
-    cd ./repo
+    cd ./repo 
     git status
     ```
-
-The repo should have downloaded onto your local computer and the status should stay "all up to date". 
-
-5. Check and update remote repo location
+    The repo should have downloaded into your Posit cloud project. 
+    The status should stay "all up to date". 
+    
+5. Check and update remote repo location.
 The following commands will set the location of your **upstream remote repository** on the QB Course GitHub site. 
 (In the example below, you will need to replace "repo" with the name of your QB Repository)
 
@@ -135,12 +111,12 @@ The following commands will set the location of your **upstream remote repositor
     During this semester, we will edit Markdown files using RStudio.
     On the lab computers, you can find RStudio in the **Analysis & Modeling Folder**.
     From RStudio, navigate to and open your README.md file in the root of your student repo.
-    After the text "Quantitative Biodiveristy course, Spring 2023, Indiana University", enter your name and email address.
+    After the text "Quantitative Biodiveristy course, Spring 2025, Indiana University", enter your name and email address.
     Write a short biography (~1 paragraph) and share something about yourself that we might not otherwise know. 
     List three to five course expectations. 
     Hint: View the Markdown guide to learn about formatting and making ordered lists <https://guides.github.com/features/mastering-markdown/>. 
     When you are done, save the close the document.
-    
+
 ## 5) GitHub Permissions
 Before going any further, we need to set up our GitHub permissions. 
 Recently, GitHub made the decision to move away from passwords.
@@ -156,7 +132,7 @@ Here are the instructions for setting this up.
 
 5. Click on "Personal access tokens" on the left-hand side,  
 
-6. Choose the "Fine-grained tokens" option,  
+6. Choose the "Tokens (classic)" option,  
 
 7. You want to assign "read and write" permissions for all repositories,  
 
@@ -190,6 +166,8 @@ We check for these changes using the git commands **fetch** and **merge** as fol
     git push origin
     git status
     ```
+
+After "git fetch upstream", Terminal should prompt you for username and password. Username is your github username (ex: "jaytlennon"). The password is the **personal access token** you just generated, not the password you use to login to github. 
 
 You should now see the repo, including your recent changes, on your GitHub webpage.
 
@@ -270,15 +248,3 @@ All are defined with respect to how we will be using Git and GitHub in this clas
   \hline
   \end{tabular}
   \end{center}
-
-## 10) Remote Desktop
-
-Ultimately, we hope that you will set up Git on your personal computer. 
-But if you ever encounter any complications arising from software incompatibility, you have the ability to remotely log into one of the cloned Mac desktop computer in 004 Fine Arts that has all of the correct versions of software needed for QB.
-Please follow these steps:
-
-1. Visit https://storefront.iuanyware.iu.edu/Citrix/IUAnyWareCASWeb/ and click on "Apps" along the top banner
-2. Select "Remote Desktop Connection" from the list of software
-3. Enter the IP address that was assigned to you in the text box following "Computer" and hit "connect"
-4. Supply your IU username and password
-5. You should now see the desktop of the computer in 004 Fine Arts
