@@ -20,13 +20,14 @@ You will not be able to complete the exercises without the corresponding handout
 Space for your answers is provided in this document and is indicated by the ">" character.
 If you need a second paragraph be sure to start the first line with ">".
 You should notice that the answer is highlighted in green by RStudio (color may vary if you changed the editor theme). 
-5. Before you leave the classroom today, it is *imperative* that you **push** this file to your GitHub repo, at whatever stage you are. Ths will enable you to pull your work onto your own computer.
+5. Before you leave the classroom today, you must **push** this file to your GitHub repo, at whatever stage you are. This will enable you to pull your work onto your own computer.
 6. When you have completed the worksheet, **Knit** the text and code into a single PDF file by pressing the `Knit` button in the RStudio scripting panel.
 This will save the PDF output in your '3.RStudio' folder.
 7. After Knitting, please submit the worksheet by making a **push** to your GitHub repo and then create a **pull request** via GitHub.
-Your pull request should include this file (**3.RStudio_Worksheet.Rmd**) with all code blocks filled out and questions answered) and the PDF output of `Knitr` (**3.RStudio_Worksheet.pdf**).
+Your pull request should include this file (**3.RStudio_Worksheet.Rmd**) with all code blocks filled out and questions answered) and the PDF output of `Knitr`   
+(**3.RStudio_Worksheet.pdf**).
 
-The completed exercise is due on **Wednesday, January 18^th^, 2023 before 12:00 PM (noon)**.
+The completed exercise is due on **Wednesday, January 22^nd^, 2025 before 12:00 PM (noon)**.
 
 ## 1) HOW WE WILL BE USING R AND OTHER TOOLS
 
@@ -302,5 +303,5 @@ Describe what you learned below in the "Answer" section and include appropriate 
 Use Knitr to create a PDF of your completed **3.RStudio_Worksheet.Rmd** document, push the repo to GitHub, and create a pull request.
 Please make sure your updated repo include both the PDF and RMarkdown files.
 
-This assignment is due on **Wednesday, January 18^th^, 2023 at 12:00 PM (noon)**.
+This assignment is due on **Wednesday, January 22^nd^, 2025 at 12:00 PM (noon)**.
 

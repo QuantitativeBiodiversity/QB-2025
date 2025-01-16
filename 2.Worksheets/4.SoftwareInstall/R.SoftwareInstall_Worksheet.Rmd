@@ -20,7 +20,7 @@ It is due on **January 18^th^, 2023 at 12:00 (noon)**.
 
 1. Edit your name in the *author* line above (line 3)
 
-2. Print a message from R using the `print` command (practic in console)
+2. Print a message from R using the `print` command (practice in console)
 
     E.g., Print "*Hello, World!*"
 ```{r}
