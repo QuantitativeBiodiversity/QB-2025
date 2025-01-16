@@ -24,7 +24,10 @@ After working through this handout, you will know how to:
 ```{r, results = 'hide'}
 rm(list = ls())
 getwd()
-setwd("~/GitHub/QB-2023/1.HandOuts/6.BetaDiversity")
+setwd("~/GitHub/QB-2025/1.HandOuts/6.BetaDiversity")
+
+# Recall, in Posit.cloud, set your working directory as follows:
+#setwd("/cloud/project")
 ```
 
 ### B. Load Packages 
@@ -43,8 +46,8 @@ for (package in package.list) {
   }
 }
 
-# Some problems in 2023 with `BiodiversityR`
-# Mostly (only) for species scores in PCoA.
+# Some reports of problems with `BiodiversityR` package
+# In particular with generation of species scores in PCoA.
 # Alternative is to load function from source file
 # source("../bin/spec.scores.function.R")
 ```

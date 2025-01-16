@@ -49,6 +49,9 @@ From this, you will gain evolutionary insight into patterns and processes of bio
 rm(list = ls())
 getwd()
 setwd("~/GitHub/QB-2023/1.HandOuts/10.PhyloTraits")
+
+# Recall, in Posit.cloud, set your working directory as follows:
+#setwd("/cloud/project")
 ```
 
 ### B. Load Packages 
@@ -61,7 +64,8 @@ This `for loop` loads each package and installs the package when `require()` ret
 package.list <- c('ape', 'seqinr', 'phylobase', 'adephylo', 'geiger', 
       'picante', 'stats', 'RColorBrewer', 'caper', 'phylolm', 'pmc', 
       'ggplot2', 'tidyr', 'dplyr', 'phangorn', 'pander', 'phytools', 'vegan',
-      'cluster', 'dendextend', 'phylogram', 'bios2mds') 
+      'cluster', 'dendextend', 'phylogram', 'bios2mds', 'pak', 'formatR') 
+
 for (package in package.list) {
   if (!require(package, character.only = TRUE, quietly = TRUE)) {
     install.packages(package)
@@ -69,14 +73,9 @@ for (package in package.list) {
   }
 }
 
-# Some bioinformatics packages come through BioConductor
-# Requires own installation method
-if (!require("BiocManager", quietly = TRUE)) {
-    install.packages("BiocManager")
-  }
-if(!require("msa", quietly = TRUE)) {
-  BiocManager::install("msa") 
-  }
+#comment out after first run to prevent continuous reinstall/update
+#pak::pkg_install("msa")
+
 library(msa)
 ```
 
@@ -555,13 +554,16 @@ Let us look at what happens when we transform our tree with lambda values of 1, 
 
 ```{r}
 # Visualize Trees With Different Levels of  Phylogenetic Signal {geiger}
-nj.lambda.5 <- geiger::rescale(nj.rooted, "lambda", 0.5)
-nj.lambda.0 <- geiger::rescale(nj.rooted, "lambda", 0)
-layout(matrix(c(1, 2, 3), 1, 3), width = c(1, 1, 1))
-par(mar=c(1, 0.5, 2, 0.5) + 0.1) 
-plot(nj.rooted, main = "lambda = 1", cex = 0.7, adj = 0.5)
-plot(nj.lambda.5, main = "lamba = 0.5", cex = 0.7, adj = 0.5)
-plot(nj.lambda.0, main = "lamba = 0",  cex = 0.7, adj = 0.5)
+
+# *** Error: 'rescale' is not an exported object from 'namespace:geiger'
+# *** Going to comment out for now until we identify solution.
+#nj.lambda.5 <- geiger::rescale(nj.rooted, "lambda", 0.5)
+#nj.lambda.0 <- geiger::rescale(nj.rooted, "lambda", 0)
+#layout(matrix(c(1, 2, 3), 1, 3), width = c(1, 1, 1))
+#par(mar=c(1, 0.5, 2, 0.5) + 0.1) 
+#plot(nj.rooted, main = "lambda = 1", cex = 0.7, adj = 0.5)
+#plot(nj.lambda.5, main = "lamba = 0.5", cex = 0.7, adj = 0.5)
+#plot(nj.lambda.0, main = "lamba = 0",  cex = 0.7, adj = 0.5)
 ```
 
 Now, let us generate quantitative output to assess how much phylogenetic signal is in our data set.
@@ -569,8 +571,8 @@ For this test, we will compare the phylogenetic signal of niche breadth using tr
 
 ```{r, results = 'hide', message = FALSE, warning = FALSE}
 # Generate Test Statistics for Comparing Phylogenetic Signal {geiger}
-fitContinuous(nj.rooted, nb, model = "lambda")
-fitContinuous(nj.lambda.0, nb, model = "lambda")
+# *** fitContinuous(nj.rooted, nb, model = "lambda")
+# *** fitContinuous(nj.lambda.0, nb, model = "lambda")
 ```
 
 From here we are able to get AIC scores. Differences in AIC scores provide maximum likelihood inference regarding the quality of model fit to a given data set. Models with lower AIC values are better. However, if the difference in AIC values between two models ($\Delta$ AIC) is not greater than at least 2, then the models are considered equivalent. 

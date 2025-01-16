@@ -44,7 +44,10 @@ It is critical to note, however, that other mechanisms can give rise to patterns
 ```{r, results = 'hide'}
 rm(list = ls())
 getwd()
-setwd("~/GitHub/QB-2023/1.HandOuts/11.PhyloCom")
+setwd("~/GitHub/QB-2025/1.HandOuts/11.PhyloCom")
+
+# Recall, in Posit.cloud, set your working directory as follows:
+#setwd("/cloud/project")
 ```
 
 ### B. Load Packages 
@@ -586,13 +589,17 @@ dbrda.explainvar1 <- round(ponds.dbrda$CCA$eig[1] /
                     sum(c(ponds.dbrda$CCA$eig, ponds.dbrda$CA$eig)), 3) * 100
 dbrda.explainvar2 <- round(ponds.dbrda$CCA$eig[2] / 
                     sum(c(ponds.dbrda$CCA$eig, ponds.dbrda$CA$eig)), 3) * 100
+
 # Make dbRDA plot
+
+# Extract scores from the dbRDA object
+ponds_scores <- vegan::scores(ponds.dbrda, display = "sites")
 
 # Define plot parameters
 par(mar = c(5, 5, 4, 4) + 0.1)
 
 # Initiate plot
-plot(scores(ponds.dbrda, display = "wa"), xlim = c(-2, 2), ylim = c(-2, 2),
+plot(ponds_scores, xlim = c(-2, 2), ylim = c(-2, 2),
   xlab = paste("dbRDA 1 (", dbrda.explainvar1, "%)", sep = ""),
   ylab = paste("dbRDA 2 (", dbrda.explainvar2, "%)", sep = ""),
   pch = 16, cex = 2.0, type = "n", cex.lab = 1.5, cex.axis = 1.2, axes = FALSE)
@@ -603,23 +610,37 @@ axis(side = 2, labels = T, lwd.ticks = 2, cex.axis = 1.2, las = 1)
 abline(h = 0, v = 0, lty = 3)
 box(lwd = 2)
 
-# Add points & labels
-points(scores(ponds.dbrda, display = "wa"),
-       pch = 19, cex = 3, bg = "gray", col = "gray")
-text(scores(ponds.dbrda, display = "wa"), 
-    labels = row.names(scores(ponds.dbrda, display = "wa")), cex = 0.5)
+# Extract site scores
+wa_scores <- vegan::scores(ponds.dbrda, display = "sites")
 
-# Add environmental vectors
-vectors <- scores(ponds.dbrda, display = "bp")
-#row.names(vectors) <- c("Temp", "DO", "chla", "DON")
-arrows(0, 0, vectors[,1] * 2, vectors[, 2] * 2, 
+# Add points and labels
+points(wa_scores, 
+       pch = 19, cex = 3, col = "gray")
+
+# Add labels
+text(wa_scores, 
+     labels = rownames(wa_scores), 
+     cex = 0.5)
+
+# Extract environmental vectors (biplot scores)
+vectors <- vegan::scores(ponds.dbrda, display = "bp")
+
+# Add environmental vectors to the plot
+arrows(0, 0, vectors[,1] * 2, vectors[,2] * 2, 
        lwd = 2, lty = 1, length = 0.2, col = "red")
-text(vectors[,1] * 2, vectors[, 2] * 2, pos = 3, 
-     labels = row.names(vectors))
+
+# Add labels for the environmental vectors
+text(vectors[,1] * 2, vectors[,2] * 2, pos = 3, 
+     labels = rownames(vectors))
+
+# Add axes for the vectors
 axis(side = 3, lwd.ticks = 2, cex.axis = 1.2, las = 1, col = "red", lwd = 2.2,
-     at = pretty(range(vectors[, 1])) * 2, labels = pretty(range(vectors[, 1])))
+     at = pretty(range(vectors[, 1]) * 2), 
+     labels = pretty(range(vectors[, 1]) * 2))
+
 axis(side = 4, lwd.ticks = 2, cex.axis = 1.2, las = 1, col = "red", lwd = 2.2,
-     at = pretty(range(vectors[, 2])) * 2, labels = pretty(range(vectors[, 2])))
+     at = pretty(range(vectors[, 2]) * 2), 
+     labels = pretty(range(vectors[, 2]) * 2))
 ```
 
 ## 6) SPATIAL PHYLOGENETIC COMMUNITY ECOLOGY
@@ -657,8 +678,11 @@ bray.curtis.dist <- 1 - vegdist(comm)
 unifrac.dist <- 1 - dist.uf 
   
 # Transform all distances into pairwise long format with the melt function from {reshape}:
+# (some warnings; may want to consider using melt fucntion from library(reshape2))
 unifrac.dist.mlt <- melt(as.matrix(unifrac.dist))[melt(upper.tri(as.matrix(unifrac.dist)))$value,]
+
 bray.curtis.dist.mlt <- melt(as.matrix(bray.curtis.dist))[melt(upper.tri(as.matrix(bray.curtis.dist)))$value,]
+
 coord.dist.mlt <- melt(as.matrix(coord.dist))[melt(upper.tri(as.matrix(coord.dist)))$value,]
 env.dist.mlt <- melt(as.matrix(env.dist))[melt(upper.tri(as.matrix(env.dist)))$value,]
 

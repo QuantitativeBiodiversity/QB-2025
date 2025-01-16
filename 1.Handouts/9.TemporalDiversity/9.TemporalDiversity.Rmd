@@ -23,7 +23,10 @@ You will then learn the basics of time series analysis, repeated-measures analys
 ```{r, results = 'hide'}
 rm(list=ls()) 
 getwd() 
-setwd("~/GitHub/QB-2023/1.HandOuts/9.TemporalDiversity")
+setwd("~/GitHub/QB-2025/1.HandOuts/9.TemporalDiversity")
+
+# Recall, in Posit.cloud, set your working directory as follows:
+#setwd("/cloud/project")
 ```
 
 ### Install Packages
