@@ -16,7 +16,7 @@ Your group will be responsible for the following:
 You should talk with your partner after the first class. 
 Perhaps one of you have a dataset that is appropriate for analysis. 
 If not, you will need to identify a publicly available dataset.
-There are a few places you might look for biodiversity data sets, including ESA data papers (<http://www.esapubs.org/archive/search.php>), the LTER data portal (<https://portal.lternet.edu/nis/home.jsp>), or the Dryad digital repository (<http://datadryad.org/>). 
+There are a few places you might look for biodiversity data sets, including ESA data papers (<http://www.esapubs.org/archive/search.php>), the LTER data portal (<https://portal.lternet.edu/nis/home.jsp>), the Dryad digital repository (<http://datadryad.org/>), and the NEON data portal (<https://data.neonscience.org/>).
 
 There are a few things that you will want to look for in a useful dataset for the QB Group Diversity Projects:
 
@@ -33,9 +33,9 @@ You will become familiar with your dataset because we will be asking you questio
 
 ## ANALYSES
 Outside of course, you and your partner will can use techniques from QB, but also others to analyze your data to address questions relevant to biodiversity research. 
-You will need visualize the data and test hypotheses when appropriate. You will create an RMarkdown document that contains your data, code, and figures. This will be submitted by **12:00 (noon) on Wednesday, March 1, 2023**
+You will need visualize the data and test hypotheses when appropriate. You will create an RMarkdown document that contains your data, code, and figures. This will be submitted by **12:00 (noon) on Wednesday, March 5, 2025**
 
 ## PRESENTATIONS
 You and your partner will give a joint, 10-15 minute presentation to QB on the last day of class (i.e., March 3) using powerpoint or google slides. 
-The slides for your presentation should be pushed to GitHub by **12:00 (noon) on Thursday, May 2, 2023**
+The slides for your presentation should be pushed to GitHub by **12:00 (noon) on Thursday, March 6, 2025**
 

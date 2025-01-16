@@ -20,6 +20,9 @@ From there, we will discuss ways to integrate richness and evenness, which will 
 rm(list = ls()) 
 getwd() 
 setwd("~/GitHub/QB-2023/1.HandOuts/5.AlphaDiversity")
+
+# Recall, in Posit.cloud, set your working directory as follows:
+#setwd("/cloud/project")
 ```
 
 ### B. Install Packages
@@ -506,20 +509,6 @@ xlab = "q exponent", ylab = "Diversity (ENS)")
 
 This plot shows that richness is high, but as we increasingly favor abundant species diversity drops, indicating that our community is composed of some abundant and some rare species. We explored Hill numbers with packages and functions that we know. Today, there are methods which allow combining rarefaction methods and Hill numbers. They also provide extrapolation methods and compute confidence intervals around the diversity estimations. Feel free to discover `iNext` package (Hsieh et al. 2016).
 
-**References**
-
-Chao,  A.  et  al.  2014.  Rarefaction  and  extrapolation  with  Hill  numbers:  a  framework  for sampling  and  estimation  in  species  diversity studies. – Ecol. Monogr. 84: 45–67.
-
-Jost, L. 2006. Entropy and diversity. – Oikos 113: 363–375.
-
-Jost, L. 2010. The relation between evenness and diversity. – Diversity 2: 207–232.
-
-Hill, M. O. 1973. Diversity and evenness: a unifying notation and its consequences. – Ecology 54: 427–432.
-
-Hsieh T. et al. 2016. iNEXT: an R package for rarefaction and extrapolation of species diversity (Hill numbers). – Methods Ecol Evol 7: 1451–1456.
-
-MacArthur R. H. 1965. Patterns of Species Diversity. – Biological Reviews 40: 510–533.
-
 ## 7) MOVING BEYOND UNIVARIATE METRICS OF $\alpha$-DIVERSIY 
 
 The diversity metrics that we just learned about attempt to integrate richness and evenness into a single, univariate metric.
@@ -569,3 +558,17 @@ A **broken stick model** (Pielou 1975) where the expected abundance of a species
 *N* is the total number of individuals and *S* is the total number of species.
 This gives a constraint-based null model where the *N* individuals are randomly distributed among *S* species, and there are no fitted parameters.
 Null models often reveal that realistic patterns can be expected from random sampling, and have been extremely useful in ecology and evolution.
+
+## 8) REFERENCES
+
+Chao,  A.  et  al.  2014.  Rarefaction  and  extrapolation  with  Hill  numbers:  a  framework  for sampling  and  estimation  in  species  diversity studies. – Ecol. Monogr. 84: 45–67.
+
+Jost, L. 2006. Entropy and diversity. – Oikos 113: 363–375.
+
+Jost, L. 2010. The relation between evenness and diversity. – Diversity 2: 207–232.
+
+Hill, M. O. 1973. Diversity and evenness: a unifying notation and its consequences. – Ecology 54: 427–432.
+
+Hsieh T. et al. 2016. iNEXT: an R package for rarefaction and extrapolation of species diversity (Hill numbers). – Methods Ecol Evol 7: 1451–1456.
+
+MacArthur R. H. 1965. Patterns of Species Diversity. – Biological Reviews 40: 510–533.
