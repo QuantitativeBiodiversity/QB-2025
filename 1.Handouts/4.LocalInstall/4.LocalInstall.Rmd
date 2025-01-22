@@ -7,23 +7,22 @@ geometry: margin = 2.54cm
 
 ## OVERVIEW
 
-Quantitative Biodiversity (QB) will rely on Posit.Cloud as an integrated environment for using  R, RStudio, Git, and LaTeX. While this is convenient -- especially for learning in the classroom -- you may want to install these programs on your personal computer. The following guide provides instruction on how do this. 
+Quantitative Biodiversity (QB) uses Posit.Cloud as an integrated platform for R, RStudio, Git, and LaTeX, offering a convenient and streamlined environment for classroom learning. However, you may prefer to install these programs on your personal computer for greater flexibility. This guide provides step-by-step instructions to help you get started.
 
 ## 1) R
 
 R is used to manipulate, visualize, and statistically analyze data.
 Install the latest version of R (January 2025: v 4.4.2; "Pile of Leaves") using the following instructions:
 
-1. Open a web browser and navigate to the IU CRAN mirror: http://ftp.ussg.iu.edu/CRAN/
+1. Open a web browser and navigate to the IU CRAN mirror: https://cran.r-project.org/
 2. Select your operating system (Mac, Windows, Linux)
     For Windows Users: install the `base package`
-    For Mac Users: install the package for your current version of OS X. 
-    You can find out what version is installed by going to the Apple menu and choosing
-    "About This Mac". 
+    For Mac Users: install the package that matches the version of your operating system (OS). 
+    You can retrieve this information by going to the Apple menu and choosing "About This Mac". 
     The version number of OS X you are using appears directly below the words "OS X."
 3. The default installation options are recommended for most users.
 
-**Mac users please read**:
+**Important note for Mac users**:
     The most recent versions of R no longer come packaged with an X11 graphics device.
     Instead, it relies on the program XQuartz for generating plots, etc.
     If you do not already have XQuartz installed, you will need to do this.
@@ -32,9 +31,8 @@ Install the latest version of R (January 2025: v 4.4.2; "Pile of Leaves") using 
 
 ## 2)  RStudio
 
-RStudio is the most popular development environment to conduct exercises in R.
-It also can edit and create Markdown files. 
-To install RStudio: please do the following:
+RStudio is the most widely used development environment for working with R, making it ideal for conducting exercises and creating or editing Markdown files. 
+To install RStudio, follow these steps:
 
 1. Open a web browser and navigate to https://posit.co/download/rstudio-desktop/.
 2. Select and download the appropriate installer for your operating system (Windows, Mac, Linux).
@@ -43,11 +41,7 @@ To install RStudio: please do the following:
 
 ## 3)  LaTex
 
-LaTeX is a useful typesetting system.
-LaTeX can be used via RStudio and the R package **`Knitr`**, which converts our RMarkdown files (.Rmd) into professional-quality PDF files. 
-This will happen each time we use the "Knit" button in RStudio.
-This means that we need to have LaTeX installed, along with a few other packages.   
-Note that the `Knitr` conversion will output a .PDF file with the same name as the processed .Rmd file. This cannot be completed if the target file is being used by another program such as a PDF reader.  
+LaTeX is a powerful typesetting system, particularly well-suited for representing mathematical notation. It integrates seamlessly with RStudio and the R package knitr, enabling the conversion of R Markdown files (.Rmd) into professional-quality PDFs. This process is triggered each time you click the "Knit" button in RStudio. To enable this functionality of the **`Knitr`** package, you must install LaTeX along with a few supporting packages.
 
 If you do not have LaTeX installed on your computer, you will need to do one of the following: 
 
@@ -61,14 +55,13 @@ install.packages('tinytex')
 tinytex::install_tinytex()
 ```
 
-During installation a couple of error messages may pop up. 
-These may be ignored, just hit the `OK` button and the installation should continue. 
-It takes several minutes to complete.
-Once the installation is complete you should restart RStudio and check if TinyTex properly installed by typing `tinytex:::is_tinytex()` in the R console. 
-If the returned value is `TRUE` you should be good to knit .Rmd files to PDF.
+During installation, you may encounter a few error messages. These can be safely ignored—simply click `OK` to proceed. 
+The installation process may take several minutes to complete.
+Once finished, restart RStudio and verify that TinyTeX was installed correctly by entering `tinytex:::is_tinytex()` in the R console. 
+If the function returns `TRUE`, you're all set to knit .Rmd files into PDF format.
 
 ### Alternative installation method for TinyTex
-If for some reason TinyTex fails to install on you machine you can try the following:  
+If for some reason TinyTex fails to install on your personal computer, you can try the following:  
 **On a Mac**:
 
 1. Install Basic Tex: https://tug.org/mactex/morepackages.html
@@ -78,14 +71,14 @@ If for some reason TinyTex fails to install on you machine you can try the follo
 
 1. Install Basic MiKTeX: http://miktex.org/download.
 2. Note: you need to use the MiKTeX package manager to download required style guides.
-3. Add folder containing MiKTeX binaries to your **PATH environment variable**
+3. Add folder containing MiKTeX binaries to your **PATH environment variable**.
 
 By default, RStudio uses style guides to format our PDF documents. 
 These style guides include framed.sty and titling.sty.
 We have found that not all LaTeX installations include these style guides.
 If you do not have them, you will get an error message when you "Knit".
 To fix this, you need to install the required files.
-For instructions to add MiKTeX binaries to **PATH environment variable** see https://stackoverflow.com/questions/47911135/r-sweave-no-tex-installation-detected.
+For instructions on how to add MiKTeX binaries to **PATH environment variable** see https://stackoverflow.com/questions/47911135/r-sweave-no-tex-installation-detected.
 
 **On a Mac**:
 Type the following in terminal
@@ -141,7 +134,7 @@ If you do not have Git yet installed, please do the following:
 4. Open the installer and follow the on-screen directions.
 
   **On Mac**: You will need to make sure you have Xcode Command Line Tools installed.
-  To test this type `which g++` at the command line (i.e., Terminal).
+  To test this, type `which g++` at the command line (i.e., Terminal).
   If you get `/usr/bin/g++` as a reply, then you are ready to move on.
   
   **On Windows**: This process will install Git Bash (msysGit). 
@@ -149,12 +142,12 @@ If you do not have Git yet installed, please do the following:
   To provide you with the most flexibility, we recommend that you select the option to "Use Git from the Windows Command Prompt".
   In addition, we recommend that during installation you select "Use OpenSSH" for your secure shell client with GitBash.
   
-    During installation, you will be asked how to configure the line-ending conversions
+During installation, you will be asked how to configure the line-ending conversions:
   **On Mac**: We recommend "Checkout as-is, commit Unix-style line endings"
   **On Windows**: We recommend "Checkout Windows-style, commit Unix-style line endings"
   
 ### Conifguring Git
-1. **Organization:** We recommend that you create a folder in your user directory called '*GitHub*' to make this and future assignments easier to manage. 
+1. **Organization:** We recommend that you create a folder in your user directory called '*GitHub*' to make your projects easier to manage. 
 In the following code, you will move to your user directory using the `cd` (change directory) function.
 The *slashdot* (./) specifies your current directory (../ would specify the directory above your current directory) and you will make a new directory with `mkdir` function. 
 
