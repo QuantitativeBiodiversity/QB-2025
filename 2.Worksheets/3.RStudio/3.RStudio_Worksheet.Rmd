@@ -9,20 +9,21 @@ geometry: margin=2.54cm
 ## OVERVIEW
 
 This worksheet introduces some of the basic features of the R computing environment (http://www.r-project.org).
-It is designed to be used along side the **3. RStudio** handout in your binder. 
-You will not be able to complete the exercises without the corresponding handout.
+It is designed to be used along side the **3. RStudio** Handout in your binder. 
+You will not be able to complete the exercises without the corresponding Handout.
+We recommend that you work through this Worksheet on the computer with your Handoutopen in your binder. 
 
 ## Directions:
 1. In the Markdown version of this document in your cloned repo, change "Student Name" on line 3 (above) with your name.
 2. Complete as much of the worksheet as possible during class.
 3. Use the handout as a guide; it contains a more complete description of data sets along with examples of proper scripting needed to carry out the exercises.
-4. Answer questions in the  worksheet.
+4. Answer questions in the Worksheet.
 Space for your answers is provided in this document and is indicated by the ">" character.
 If you need a second paragraph be sure to start the first line with ">".
 You should notice that the answer is highlighted in green by RStudio (color may vary if you changed the editor theme). 
-5. Before you leave the classroom today, you must **push** this file to your GitHub repo, at whatever stage you are. This will enable you to pull your work onto your own computer.
+5. Before you leave the classroom today, you may want to **push** this file to your GitHub repo, at whatever stage you are. This will enable you to pull your work onto your own computer.
 6. When you have completed the worksheet, **Knit** the text and code into a single PDF file by pressing the `Knit` button in the RStudio scripting panel.
-This will save the PDF output in your '3.RStudio' folder.
+This will save the PDF output in your Posit.cloud workspace: `/cloud/project/QB-2025/Week-1/`
 7. After Knitting, please submit the worksheet by making a **push** to your GitHub repo and then create a **pull request** via GitHub.
 Your pull request should include this file (**3.RStudio_Worksheet.Rmd**) with all code blocks filled out and questions answered) and the PDF output of `Knitr`   
 (**3.RStudio_Worksheet.pdf**).
@@ -46,7 +47,7 @@ Even if you are able to knit without issue, you should review the knitted docume
 In the R code chunk below, please provide the code to: 
 1) clear your R environment,
 2) print your current working directory, and
-3) set your working directory to your '3.RStudio' folder. 
+3) set your working directory to your `Week-1/` folder. 
 
 ```{r}
 
@@ -113,11 +114,6 @@ v <- c(16.4, 16.0, 10.1, 16.8, 20.5, NA, 20.2, 13.1, 24.8, 20.2, 25.0, 20.5, 30.
 
 
 
-
-
-
-
-
 ```
 
 ## 5) WORKING WITH MATRICES
@@ -140,7 +136,7 @@ What do the arguments in this function specify?
 Remember to use `help()` or type `?rnorm`.
 
 > Answer 1:
-
+>
 
 In the R code chunk below, do the following: 
 1) Load `matrix.txt` from the **3.RStudio** data folder as matrix `m`.
@@ -157,7 +153,7 @@ In the R code chunk below, do the following:
 ***Question 2***: What are the dimensions of the matrix you just transposed?
 
 > Answer 2:
-
+>
 
 ###Indexing a Matrix
 
@@ -174,7 +170,7 @@ In the R code chunk below, do the following:
 ### Load Zooplankton Data Set
 
 In the R code chunk below, do the following:
-1) Load the zooplankton data set from the **3.RStudio** data folder.
+1) Load the zooplankton data set from the **Week-1/** data folder.
 2) Display the structure of this data set.
 
 ```{r}
@@ -195,10 +191,10 @@ In the R-code chunk below, do the following:
 ```
 
 
-***Question 3***: Describe some of the general features based on the visualization and correlation analysis above?
+***Question 3***: Describe some of the general features based on the visualization and correlation analysis above.
 
 > Answer 3:
-
+>
 
 In the R code chunk below, do the following:
 1) Redo the correlation analysis using the `corr.test()` function in the `psych` package with the following options: method = "pearson", adjust = "BH".
@@ -219,6 +215,7 @@ With the Pearson's method, is there evidence for false discovery rate due to mul
 Why is false discovery rate important?
 
 > Answer 4: 
+>
 
 ### Linear Regression
 
@@ -240,7 +237,7 @@ In the R code chunk below, do the following:
 ***Question 5***: Interpret the results from the regression model
 
 > Answer 5:
-
+>
 
 ```{r}
 
@@ -292,6 +289,9 @@ The remaining columns of data refer to the biomass (µg/L) of different zooplank
 ***Question 6***: With the visualization and statistical tools that we learned about in the **3. RStudio** handout, use the site-by-species matrix to assess whether and how different zooplankton taxa were responsible for the total biomass (ZP) response to nutrient enrichment. 
 Describe what you learned below in the "Answer" section and include appropriate code in the R chunk.
 
+> Answer 6:
+>
+
 ```{r}
 
 
@@ -300,7 +300,14 @@ Describe what you learned below in the "Answer" section and include appropriate 
 ```
 
 ## SUBMITTING YOUR WORKSHEET
-Use Knitr to create a PDF of your completed **3.RStudio_Worksheet.Rmd** document, push the repo to GitHub, and create a pull request.
+Use Knitr to create a PDF of your completed **3.RStudio_Worksheet.Rmd** document, push the repo to GitHub, and create a pull request, but *do not* self-merge it. 
+In a collaboration when using github, you will often assign a pull request to *another* person.
+This alerts your collaborator to the proposed changes and allows them to look them over before accepting them. 
+To formally **assign** a pull request to someone, you will see an option on the right hand side to choose a reviewer or a assignee. 
+If you click on the gear icon, a list of collaborators will come up. 
+Your primary instructor (`jaytlennon`) should be one of those on the QBstudent organization. 
+Click on his username to assign before you finalize the pull request. 
+
 Please make sure your updated repo include both the PDF and RMarkdown files.
 
 This assignment is due on **Wednesday, January 22^nd^, 2025 at 12:00 PM (noon)**.
