@@ -139,7 +139,7 @@ Remember to use `help()` or type `?rnorm`.
 >
 
 In the R code chunk below, do the following: 
-1) Load `matrix.txt` from the **3.RStudio** data folder as matrix `m`.
+1) Load `matrix.txt` from the **Week-1** data folder as matrix `m`.
 2) Transpose this matrix.
 3) Determine the dimensions of the transposed matrix.
 
@@ -155,7 +155,7 @@ In the R code chunk below, do the following:
 > Answer 2:
 >
 
-###Indexing a Matrix
+### Indexing a Matrix
 
 In the R code chunk below, do the following:
 1) Index matrix `m` by selecting all but the third column.
