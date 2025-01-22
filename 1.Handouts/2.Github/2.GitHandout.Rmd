@@ -120,8 +120,9 @@ The following commands will set the location of your **upstream remote repositor
     To the right, you can click on the squares icon to copy the url to your clipboard. 
     Now, you can paste this into the Terminal to update the upstream remote. 
 
-6. In RStudio, go to File -> Open and select the README.md file contained in your student repository.
-Immediately following the text that already exists in this file, take a few minutes to supply the following:
+6. Inside the RStudio Project you currently have open, go to the top toolbar and select File -> Open.
+Select the README.md file contained in your student repository.
+Immediately following the text that already exists in this file, take a few minutes to do the following:
 Enter your name and email address.
 Write a short biography (~1 paragraph) and share something about yourself that we might not otherwise know. 
 List three to five course expectations. 
@@ -146,14 +147,20 @@ Here are the instructions for setting this up.
 
 6. Choose the "Tokens (classic)" option.
 
-7. You want to assign "read and write" permissions for all repositories.  
+7. Give your token an identifying name (e.g., "Posit Token") by filling in the Note textbox.
 
-8. Assign a token name and description for 90 days.
+8. Select expiration date of 90 days.
 
-9. After generating token, make sure you copy and save; you will need this for next step. Note that when you paste your token into the password prompt in the Terminal, you will not be able to see the token characters. 
+9. Assign "read and write" permissions in the first section, called "repo". 
+For this class, your token will not need permissions beyond this first section, but checking all permissions on the list will not hurt.
+
+    \includegraphics{images/github_token_permissions.png}
+    
+10. After generating the token, make sure you copy and save; you will need this for next step. 
 
 In the process above, token generation and verification is linked to Duo, which can be enabled in "Settings" under "Passwords and authentication". 
-Duo will generate a GitHub associated six-digit code that you will be asked to supply to github.com    
+Most of you are already familiar with IU's use of Duo as a two-factor authentication system, but if needed, more information can be found [here](https://servicenow.iu.edu/kb?id=kb_article_view&sysparm_article=KB0024565).
+Duo will generate a GitHub associated six-digit code that you will be asked to supply to github.com       
 
 ## 6) Commit and Push
 Now that your permissions are established, we can commit our changes and pushing them upstream to the remote repository with the following instructions:
@@ -182,19 +189,32 @@ We check for these changes using the git commands **fetch** and **merge** as fol
 After "git fetch upstream", Terminal should prompt you for a username and password. 
 Username is your github username (e.g.,: "jaytlennon"). 
 The password is the **personal access token** you just generated, not the password you use to login to github. 
-**Make comment about pasting**
+Note that when you paste your token into the password prompt in the Terminal, you will not be able to see the token characters. 
 
 You should now see the repo, including your recent changes, on your GitHub webpage.
 
 ## 7) Pull Request
 After pushing your commit, you need to follow up by making a **Pull Request**.
 
-1. Navigate to your GitHub webpage to make sure that the file (e.g., README.md) was uploaded correctly. 
-If so, submit a pull request to submit your file to the course instructors. <br>
+1. Navigate to your forked GitHub repo (github.com/username/QB2025_LastName) to make sure that the file (e.g., README.md) was uploaded correctly and has updated. 
+If so, make a pull request to submit your file to the course instructors. <br>
 
-    \includegraphics[height=0.75cm]{images/github_pr_btn.png}
+2. To make a pull request, click the blue text (at the top of your repo) which indicates "this repo is x number of commits ahead" of the main (upstream) repo (github.com/QBStudents/QB2025_LastName).
+
+    \includegraphics[height=0.75cm]{images/github_commitahead.png}
   
-    The course instructors can now merge and see your changes.
+3. Select the green "create pull request" button to start a pull request.
+
+    \includegraphics[height=0.75cm]{images/github_pr_btn_new.png}
+    
+4. For **future** homework assignments (worksheets), we will have you "assign" a pull request to the primary instructor of QB (Jay), so he knows when you have "turned" in your homework. 
+To do that, click the settings symbol next "assignees" in the right hand column. 
+Select jaytlennon. 
+Then submit the pull request. The course instructors can now merge and see your changes.
+
+     \includegraphics{images/github_assign_pull.png}
+
+5. To update your README.md today, **do not assign** an instructor (jaytlennon) to the pull request, and inside submit and then accept the pull request yourself. Afterwards, you should see your QBStudents/QB2025_Lastname README.md has updated. 
     
 ## 8) Getting Up to Date   
 2. To get new worksheets, you will *pull* your upstream repository to your local computer using the **fetch** and **merge**. 
