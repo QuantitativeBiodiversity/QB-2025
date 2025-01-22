@@ -66,7 +66,7 @@ While most any technology company, federal agency, research or data center (e.g.
 
 #### Assignment 2: Read paper on Git and GitHub  
 
-+ Blischak JD, Davenport ER, Wilson G (2016) A quick introduction to version control with Git and GitHub. PLoS Comput Biol 12(1): e1004668. doi:10.1371/journal.pcbi.1004668
++ Blischak JD, Davenport ER, Wilson G (2016) A quick introduction to version control with Git and GitHub. PLOS Comput Biol 12(1): e1004668. doi:10.1371/journal.pcbi.1004668
 + An open-access copy of the paper can be found here: <https://goo.gl/1WYu2f>
 
 #### Assignment 3: Linux tutorial  
@@ -105,13 +105,13 @@ For example, regardless of how old your computer is or what operating system it 
 #### Assignment 4: Create a Posit.cloud account
 + Navigate to <https://posit.cloud> and click on the "sign up" icon
 + Step 1: Select "Learn More" about the **Free** Plan ($0/forever) and sign up for it
-+ Step 2: supply a username, your email address, and a password
++ Step 2: Supply a username, your email address, and a password
 + Step 3: Log in to Posit.cloud and navigate to the page called "Your Workspace", which should be empty.
 + Step 4: Click the button "New Project" (in the right hand corner) and select the dropdown "New RStudio Project." 
 
 Note that every "Project" in Posit.cloud is self-contained. 
 That means project contents are *only accessible when the project itself is open* in Posit.Cloud. 
-Any modification that you make in a project (e.g., file created or package installed) are saved within that project, but all new projects created (ex: "New RStudio Project") are separate clean slates.
+Any modification that you make in a project (e.g., file created or package installed) is saved within that project, but all new projects created (e.g., "New RStudio Project") are separate clean slates.
 
 + Step 5: Once RStudio in Posit.cloud has loaded, open the script editor from the File menu on the top left corner:
 `File > New File > R script.`
@@ -128,7 +128,7 @@ There are a few different ways to execute (i.e., submit) your code in RStudio.
 First, the lower left-hand panel of the RStudio window is referred to as the *Console*.
 You can type your code directly at the **command line** in the console and hit enter.
 This is quick and easy, but it is not a great way to conduct reproducible science.
-A second way to execute code is to type it into the **script editor pane** in the upper-left panel of the Rstudio window.
+A second way to execute code is to type it into the **script editor pane** in the upper-left panel of the RStudio window.
 The code that you write can then be saved in an organized way as an RMarkdown file (*.Rmd file*) when you are finished. 
 You can execute code from the script editor pane by hitting Command+Enter (Mac) or Ctrl+Enter (PC).
 This will submit all of the code for the line where your cursor is located.
@@ -164,7 +164,11 @@ Use the **console pane** in the lower left of the Rstudio window to complete the
 sin(4) 
 ```
 
-***Logarithms*** Here is another example of functions and arguments. It is common for people, even scientists, to forget what logarithms are. A logarithm is simply the exponent needed to raise one number (i.e., the base) to obtain another number. For example, the exponent needed to raise 10 to 100 is 2. So, 2 is the logarithm of 100 using base 10.
+***Logarithms*** Here is another example of functions and arguments. 
+It is common for people, even scientists, to forget what logarithms are. 
+A logarithm is simply the exponent needed to raise one number (i.e., the base) to obtain another number. 
+For example, the exponent needed to raise 10 to 100 is 2. 
+So, 2 is the logarithm of 100 using base 10.
 
 ```{r, results = 'hide'}
 log10(100)  # log base 10
@@ -215,7 +219,8 @@ You can now clear all of the stored variables from R's memory using two function
 rm(list = ls())
 ```
 
-For your convenience you might also want to clear the console. this can be done usin `CTRL` + `L`. 
+For your convenience you might also want to clear the console. 
+This can be done usin `CTRL` + `L`. 
 This will not erase the history of commands you executed. 
 These can be found in the **History tab** of the **Workspace and History pane**, and can also be accessed from the console by the up and down arrows.
 
@@ -225,7 +230,6 @@ These can be found in the **History tab** of the **Workspace and History pane**,
 Often, vectors are just a collection of data of a similar type, either numeric (e.g., 17.5), integer (e.g., 2), or character (e.g., "low", "medium", "high"). 
 The simplest type of vector is a single value, sometimes referred to as a **scalar** in other programming languages. 
 Again, use the **console pane** in the lower left to complete the following exercises:
-
 ```{r}
 w <- 5 
 ```
@@ -237,13 +241,11 @@ x <- c(2, 3, 6, w, w + 7, 12, 14)
 
 What is the function `c`() that we just used to create a vector? 
 To answer this question, type `help`() function at the command line in the console pane. 
-
 ```{r, results = 'hide'}
 help(c)
 ```
 
 You can also retrieve the same information using a question mark followed by the keyword of interest
-
 ```{r, results = 'hide'}
 ? c
 ```
@@ -300,7 +302,6 @@ The standard error of the mean is defined as $\frac{sd (x)}{\sqrt{n}}$.
 This function does not exist in the **base package** of R. 
 Therefore, you need to write your own function, either in the console or the script editor panel
 Let us give it a try:
-
 ```{r}
 sem <- function(x){
   sd(x)/sqrt(length(x))
@@ -319,7 +320,6 @@ i <- c(2, 3, 9, NA, 120, 33, 7, 44.5)
 What happens when you apply your `sem` function to vector `i`? 
 This is a problem!
 We can remedy this with the following modification of our `sem` function.
-
 ```{r}
 sem <- function(x){
   sd(na.omit(x))/sqrt(length(na.omit(x))) 

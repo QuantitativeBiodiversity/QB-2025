@@ -14,8 +14,10 @@ geometry: margin = 2.54cm
 ## OVERVIEW
 During QB, you will have access to a dedicated Mac desktop computer located in Fine Arts 004. 
 On this classroom computer, you will use the **cloud version** of RStudio (https://posit.cloud), which is accessible from anywhere and comes pre-installed with Git.
-You will use Git and GitHub on the lab computer to manage QB **worksheets**, which contain in-class **exercises** and **assignments** that will be submitted via GitHub. Today, you will learn how to **fork** and **clone** a GitHub repository. Additionally, you will practice how to **commit** and **push** changes, enabling you to later retrieve your work using the **fetch** and **merge** commands.
-In QB, assignments will be submitted to instructors for evaluation through a **pull request** on GitHub.
+You will use Git and GitHub on the lab computer to manage QB **Worksheets**, which contain in-class **exercises** and **assignments** that will be submitted via GitHub. 
+Today, you will learn how to **fork** and **clone** a GitHub repository. 
+After modifying files in your workspace, you will learn how to **commit** and **push** those changes, enabling you to later retrieve your work using the **fetch** and **merge** commands.
+In QB, assignments will be submitted to instructors for evaluation by making a **pull request** on GitHub.
 
 ***
 
@@ -26,7 +28,7 @@ In QB, assignments will be submitted to instructors for evaluation through a **p
 1. Sign in to your free Posit.cloud (https://posit.cloud/plans/free) account.
 2. On Slack and Canvas, we will provide you with an invitation you to join the QB-2025 Workspace.
 Click this link and accept the invitation.
-3. After successfully joining, you should see in the left navigation bar, under **Spaces**, both *Your Workspace* and *QB-2025*.
+3. After successfully joining, you will see in the left navigation bar, under **Spaces**, both *Your Workspace* and *QB-2025*.
 Navigate to the *QB-2025* space by clicking it. 
 
 
@@ -46,7 +48,7 @@ Therefore, we request that you only use the QB-2025 Workspace for class-related 
 Name this project "QB2025_Lastname" (e.g., QB2025_Smith).
 
 2. By default, all new projects are set to "Private." Please ensure projects remain private so that **only you have editing access**.
-Assignments will still be published publicly via Git, but keeping projects private helps prevent accidental edits to the wrong assignment, especially since Posit.Cloud autosaves automatically.
+Assignments will still be published publicly via Git, but keeping projects private helps prevent accidental edits to the wrong assignment, especially since Posit.Cloud automatically autosaves.
 
 3. While Git comes pre-installed with Posit Cloud, we are going to make a few changes to the default settings of Git (configurations) so your Posit.Cloud workspace and Git interact with each other more smoothly. 
 
@@ -60,7 +62,7 @@ This can be a useful way to change the default "under-the-hood" settings of a co
 5. Type the following lines into the terminal, line by line. 
 Press enter at the end of each line to submit the line to the terminal. 
 For variables like user.name and user.email, make sure to put in your own information!
-(It is advisable to use quotes in the configuration below.)
+(We advise using quotes as depicted in the configuration below.)
 
     ```sh
     git config --global user.name "John Doe"
@@ -73,8 +75,8 @@ For variables like user.name and user.email, make sure to put in your own inform
     
 ## 3) Open your Git Account (optional)
 1. Navigate to https://github.com.
-2. Sign in with your Username and Passphrase.
-3. On the top right of your screen, click on your Username.
+2. Sign in with your username and passphrase.
+3. On the top right of your screen, click on your username.
 4. Click on the Edit Profile Icon to edit your profile<br>.
 
     \includegraphics[height=0.75cm]{images/github_edit_btn.png}
@@ -84,6 +86,9 @@ For variables like user.name and user.email, make sure to put in your own inform
 ## 4) Fork and Clone a Repo
 1. Navigate to the QB student organization: https://github.com/QBstudents.
 2. Click on the repository (repo) with your name.
+This is going to be your **upstream** main branch for QB. 
+It is where your instructors will put new files for week assignments. 
+And when your assignments are complete, you will may a pull request to this location.
 3. Fork your repo by clicking on the Fork icon in the top right of your screen<br>:
 
     \includegraphics[width=2cm]{images/github_fork_btn.png}
@@ -91,7 +96,7 @@ For variables like user.name and user.email, make sure to put in your own inform
     You should now see the repo on your GitHub page.
   
 4. Clone the repo into your empty RStudio project (named "QB2025_LastName") using the command line (Terminal).
-Replace "username" with your GitHub username and "repo" with the name of the repo in the QBstudent organization (e.g., QB2025_Smith).
+Replace "username" with your GitHub username and "repo" with the name of the repo in the QBstudent organization (e.g., "QB2025_LastName").
 
     ```sh
     git clone https://github.com/username/repo
@@ -111,9 +116,12 @@ The following commands will set the location of your **upstream remote repositor
     git remote -v
     ```
     You can copy and paste the URL for your upstream repo from the GitHub website.
+    Click the green "code" icon and select the SSH tab.
+    To the right, you can click on the squares icon to copy the url to your clipboard. 
+    Now, you can paste this into the Terminal to update the upstream remote. 
 
 6. In RStudio, go to File -> Open and select the README.md file contained in your student repository.
-Immediately following the text that already exists in this file, supply the following:
+Immediately following the text that already exists in this file, take a few minutes to supply the following:
 Enter your name and email address.
 Write a short biography (~1 paragraph) and share something about yourself that we might not otherwise know. 
 List three to five course expectations. 
@@ -121,9 +129,9 @@ You can learn more about Markdown formatting (e.g., making ordered lists) here: 
 When you are done, save the close the document.
 
 ## 5) GitHub Permissions
-Before going any further, we need to set up our GitHub permissions. 
-Somewhat recently, GitHub made the decision to move away from passwords.
-Now, automatic token authentication is used. 
+Before going any further, we need to set up our GitHub permissions.
+GitHub no longer relies on passwords for security when performing functions. 
+Instead, it uses a token authentication system.
 Here are the instructions for setting this up. 
 
 1. Go to your GitHub site (e.g., https://github.com/jaytlennon). 
@@ -142,7 +150,7 @@ Here are the instructions for setting this up.
 
 8. Assign a token name and description for 90 days.
 
-9. After generating token, make sure you copy and save; you will need this for next step.  
+9. After generating token, make sure you copy and save; you will need this for next step. Note that when you paste your token into the password prompt in the Terminal, you will not be able to see the token characters. 
 
 In the process above, token generation and verification is linked to Duo, which can be enabled in "Settings" under "Passwords and authentication". 
 Duo will generate a GitHub associated six-digit code that you will be asked to supply to github.com    
@@ -171,7 +179,7 @@ We check for these changes using the git commands **fetch** and **merge** as fol
     git status
     ```
 
-After "git fetch upstream", Terminal should prompt you for username and password. 
+After "git fetch upstream", Terminal should prompt you for a username and password. 
 Username is your github username (e.g.,: "jaytlennon"). 
 The password is the **personal access token** you just generated, not the password you use to login to github. 
 **Make comment about pasting**
