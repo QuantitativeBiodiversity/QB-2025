@@ -11,8 +11,8 @@ geometry: margin=2.54cm
 ## OVERVIEW
 
 This handout builds from the pre-class introduction to R and RStudio, which highlighted operators, vectors, and simple commands that will be useful to you during the course and beyond. 
-Now, you will be introduced to some new data types, specifically **matrices** and **dataframes**. 
-After learning how to work with these data types, you will learn about contributed **packages**, which will aid in the visualization of data and with performing descriptive and hypothesis-testing statistical procedures, including **linear regression** and **analysis of variance (ANOVA)**.
+Now, we introduce some new data types, specifically **matrices** and **dataframes**. 
+After working with these data types, you will learn about contributed **packages**, which will aid in the visualization of data and with performing descriptive and hypothesis-testing statistical procedures, including **linear regression** and **analysis of variance (ANOVA)**.
 
 ## 1) SETTING YOUR WORKING DIRECTORY
 
@@ -32,11 +32,15 @@ getwd()
 ```
 
 Use the following command to change your directory (but note that you will need to modify to reflect _your_ actual directory). 
-If you are working in Posit.cloud, you type the following into the the console (without # sign):
+If you are working in Posit.cloud, you type the following into the the console (without the # sign). 
 
 ```{r}
-#setwd("/cloud/project")
+#setwd("/cloud/project/QB-2025/Week-1")
 ```
+
+When you type `"/cloud/project/"`, this will take you to the root of the Posit.cloud directory. 
+When you type `QB-2025`, this will take you to the QB workspace. Instructors will push worksheets and data sets to this location for you to fetch and merge each week.
+When you type `Week-1`, this is moves you to the folder containing Markdown files and a folder that contains data you will need for the exercises that are associated with this RStudio module. 
 
 If you are working on your personal computer without Posit.cloud, you might change your working directory to something that looks like this, which would reflect where your GitHub files are being locally kept:
 
@@ -136,7 +140,15 @@ In the following exercise, we will use a dataset from Lennon et al. (2003) (http
 Inorganic nitrogen and phosphorus were added to 300-L mesocosms for six weeks at three different levels (low, medium, and high), but we also directly measured nutrient concentrations of water samples. 
 So we have **categorical** and **continuous** predictors that we are going to use to help explain variation in zooplankton biomass.  
 
-The first thing we are going to do is load the nutrient data:
+The first thing we are going to do is load the nutrient data. 
+
+Using Posit.cloud, you can do this as follows, after removing the # sign: 
+
+```{r}
+#meso <- read.table("/cloud/project/QB-2025/Week-1/data/zoop_nuts.txt", sep = "\t", header = TRUE)
+```
+
+If you are using your personal computer without Posit.cloud, you would load the file like this:
 
 ```{r}
 meso <- read.table("data/zoop_nuts.txt", sep = "\t", header = TRUE)
