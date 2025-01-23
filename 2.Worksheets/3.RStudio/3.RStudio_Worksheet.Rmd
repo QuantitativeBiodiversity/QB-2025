@@ -23,7 +23,7 @@ If you need a second paragraph be sure to start the first line with ">".
 You should notice that the answer is highlighted in green by RStudio (color may vary if you changed the editor theme). 
 5. Before you leave the classroom today, you may want to **push** this file to your GitHub repo, at whatever stage you are. This will enable you to pull your work onto your own computer.
 6. When you have completed the worksheet, **Knit** the text and code into a single PDF file by pressing the `Knit` button in the RStudio scripting panel.
-This will save the PDF output in your Posit.cloud workspace: `/cloud/project/QB-2025/Week-1/`
+This will save the PDF output in your Posit.cloud workspace: `/cloud/project/QB-2025/Week1-RStudio/`
 7. After Knitting, please submit the worksheet by making a **push** to your GitHub repo and then create a **pull request** via GitHub.
 Your pull request should include this file (**3.RStudio_Worksheet.Rmd**) with all code blocks filled out and questions answered) and the PDF output of `Knitr`   
 (**3.RStudio_Worksheet.pdf**).
@@ -47,7 +47,7 @@ Even if you are able to knit without issue, you should review the knitted docume
 In the R code chunk below, please provide the code to: 
 1) clear your R environment,
 2) print your current working directory, and
-3) set your working directory to your `Week-1/` folder. 
+3) set your working directory to your `Week1-RStudio/` folder. 
 
 ```{r}
 
@@ -139,7 +139,7 @@ Remember to use `help()` or type `?rnorm`.
 >
 
 In the R code chunk below, do the following: 
-1) Load `matrix.txt` from the **Week-1** data folder as matrix `m`.
+1) Load `matrix.txt` from the **Week1-RStudio** data folder as matrix `m`.
 2) Transpose this matrix.
 3) Determine the dimensions of the transposed matrix.
 
@@ -170,7 +170,7 @@ In the R code chunk below, do the following:
 ### Load Zooplankton Data Set
 
 In the R code chunk below, do the following:
-1) Load the zooplankton data set from the **Week-1/** data folder.
+1) Load the zooplankton data set from the **Week1-RStudio/** data folder.
 2) Display the structure of this data set.
 
 ```{r}
