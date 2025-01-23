@@ -34,25 +34,25 @@ getwd()
 
 If you are working from Posit.cloud, the output from `getwd()` might look this this:
  
-  `"/cloud/project/QB-2025/Week-1"`
+  `"/cloud/project/QB-2025/Week1-RStudio"`
 
 This output is known as a **filepath**. 
 Each directory (folder) or file is separated by slash marks (/) and can be read left to right, indicating that the current file or folder is found within the previous entry. 
-For example, `"/cloud/project/QB-2025/Week-1"`, tells you that the folder `Week-1` is inside the folder `QB-2025`, which is inside the folder `project`, which is inside the folder `cloud`. 
+For example, `"/cloud/project/QB-2025/Week1-Rstudio/"`, tells you that the folder `Week1` is inside the folder `QB-2025`, which is inside the folder `project`, which is inside the folder `cloud`. 
 The first folder in a file path is often called the **root directory**, as it is the starting point, of the path. 
 In this example, "cloud" would be the root.
 
-You may need to change the working directory. 
-To so, you can use the function `setwd()`
-When you set your working directory, you are telling RStudio to think of this directory as the **root** directory. 
+When working in R, you will need to change the working directory, for example when switching between project.
+To do so, you can use the function `setwd()`
+When you set your working directory, you have the ability to change the **root** directory. 
 In other words, RStudio now thinks of all files and folders in relation to this location. 
-The working directory is the new **center** of R's world.
+The working directory is the new center of R's world.
 
 Use the following command "setwd()" to set your directory to the same location as the file you are currently working in, that is, 3.RStudio.Rmd. 
 If you are working in Posit.cloud, you should be able to type the following into the the console (without the # sign). 
 
 ```{r}
-#setwd("/cloud/project/QB-2025/Week-1")
+#setwd("/cloud/project/QB-2025//Week1-RStudio")
 ```
 
 If you are working on your personal computer without Posit.cloud, you might change your working directory to something that looks like the following, which would reflect where your GitHub files are being locally kept:
@@ -154,8 +154,7 @@ Inorganic nitrogen and phosphorus were added to 300-L mesocosms for six weeks at
 So we have **categorical** and **continuous** predictors that we are going to use to help explain variation in zooplankton biomass.  
 
 The first thing we are going to do is load the nutrient data. 
-
-Since you have set the working directory (above) to something that includes the `Week-1` folder, e.g.,: `#setwd("/cloud/project/QB-2025/Week-1")`, any additional files you want to use will rely on paths that are based on that that working directory, which means you only need to include folders that come after `Week-1`.
+To load that data, we simply extend the file path to the `data` folder within `Week1-RStudio` that contains the desired file:
 
 ```{r}
 meso <- read.table("data/zoop_nuts.txt", sep = "\t", header = TRUE)

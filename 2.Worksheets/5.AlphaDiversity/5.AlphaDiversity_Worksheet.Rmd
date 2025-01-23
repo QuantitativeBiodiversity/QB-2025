@@ -31,7 +31,7 @@ Your pull request should include this file `AlphaDiversity_Worskheet.Rmd` and th
 In the R code chunk below, please provide the code to: 
 1) Clear your R environment,
 2) Print your current working directory,
-3) Set your working directory to your `Week-2/` folder folder, and
+3) Set your working directory to your `Week2-Alpha/` folder folder, and
 4) Load the `vegan` R package (be sure to install first if you have not already).
 
 ```{r}
@@ -118,7 +118,7 @@ d.  Make some observations about coverage at the BCI plots.
 
 In the R code chunk below, do the following:
 
-1. Load the microbial dataset (located in the `Week-2/data` folder),
+1. Load the microbial dataset (located in the `Week2-Alpha/data` folder),
 
 2. Transform and transpose the data as needed (see handout),
 
@@ -399,7 +399,7 @@ We also learned to explore the effects of rare species in a community by examini
 > ***Answer 8b***:
 >
 
-##7) MOVING BEYOND UNIVARIATE METRICS OF $\alpha$ DIVERSITY
+## 7) MOVING BEYOND UNIVARIATE METRICS OF $\alpha$ DIVERSITY
 
 The diversity metrics that we just learned about attempt to integrate richness and evenness into a single, univariate metric.
 Although useful, information is invariably lost in this process. 
@@ -475,5 +475,4 @@ Any other interesting observations based on what you learned this week?
 ## SUBMITTING YOUR ASSIGNMENT
 Use Knitr to create a PDF of your completed 5.AlphaDiversity_Worksheet.Rmd document, push it to GitHub, and create a pull request.
 Please make sure your updated repo include both the pdf and RMarkdown files.
-
 Unless otherwise noted, this assignment is due on **Wednesday, January 29^th^, 2025 at 12:00 PM (noon)**.
