@@ -15,19 +15,19 @@ Now that you know how to formally quantify $\beta$-diversity, we will learn how 
 1. In the Markdown version of this document in your cloned repo, change "Student Name" on line 3 (above) with your name.
 2. Complete as much of the worksheet as possible during class.
 3. Use the handout as a guide; it contains a more complete description of data sets along with examples of proper scripting needed to carry out the exercises.
-4. Answer questions in the  worksheet.
+4. Answer questions in the worksheet.
 Space for your answers is provided in this document and is indicated by the ">" character.
 If you need a second paragraph be sure to start the first line with ">".
 You should notice that the answer is highlighted in green by RStudio (color may vary if you changed the editor theme). 
-5. Before you leave the classroom today, it is *imperative* that you **push** this file to your GitHub repo, at whatever stage you are. This will enable you to pull your work onto your own computer.
+5. Before you leave the classroom today, you should **push** this file to your GitHub repo, at whatever stage you are. This will enable you to pull your work onto your own computer.
 6. When you have completed the worksheet, **Knit** the text and code into a single PDF file by pressing the `Knit` button in the RStudio scripting panel.
-This will save the PDF output in your '8.BetaDiversity' folder.
+This will save the PDF output in your Posit.cloud workspace: `/cloud/project/QB-2025/Week4-Beta/`
 7. After Knitting, please submit the worksheet by making a **push** to your GitHub repo and then create a **pull request** via GitHub.
-Your pull request should include this file (**8.BetaDiversity_2_Worksheet.Rmd**) 
+Your pull request should include this file (**6.BetaDiversity_2_Worksheet.Rmd**) 
 with all code blocks filled out and questions answered) and the PDF output of `Knitr`  
-(**8.BetaDiversity_2_Worksheet.pdf**).
+(**6.BetaDiversity_2_Worksheet.pdf**).
 
-The completed exercise is due on **Wednesday, February 8^th^, 2023 before 12:00 PM (noon)**.
+The completed exercise is due on **Wednesday, February 12^th^, 2025 before 12:00 PM (noon)**.
 
 ## 1) R SETUP
 
@@ -38,7 +38,7 @@ In the R code chunk below, provide the code to:
 
 1. clear your R environment,
 2. print your current working directory,
-3. set your working directory to your "*/6.BetaDiversity*" folder, and
+3. set your working directory to your `Week4-Beta/` folder. 
 4. load the `vegan` R package (be sure to install if needed).  
 
 ```{r}
