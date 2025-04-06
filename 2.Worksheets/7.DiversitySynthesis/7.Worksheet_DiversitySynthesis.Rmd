@@ -9,7 +9,8 @@ geometry: margin=2.54cm
 ## OVERVIEW
 
 In this worksheet, you will conduct exercises that reinforce fundamental concepts of biodiversity.
-Specifically, you will construct a a site-by-species matrix by sampling confectionery taxa.
+First, you will construct a site-by-species matrix by sampling confectionery taxa from a source community.
+Second, you will make a preference-profile matrix, reflecting each student's favorite confectionery taxa. 
 With this primary data structure, you will then answer questions and generate figures using tools from previous weeks, along with wrangling techniques that we learned about in class. 
 
 ## Directions:
@@ -26,110 +27,109 @@ You should notice that the answer is highlighted in green by RStudio (color may 
 8. After Knitting, submit the completed exercise by creating a **pull request** via GitHub.
 Your pull request should include this file `7.DiversitySynthesis_Worskheet.Rmd` and the PDF output of `Knitr` (`DiversitySynthesis_Worskheet.pdf`).
 
-
-## CONFECTIONARY EXERCISE GOALS
+## QUANTITATIVE CONFECTIONOLOGY
 
 We will construct a site-by-species matrix using confectionery taxa (i.e, jelly beans). 
 The instructors have created a **source community** with known abundance (*N*) and richness (*S*).
 Like a real biological community, the species abundances are unevenly distributed such that a few jelly bean types are common while most are rare. 
-Each student will sample the source community and separate their jelly beans into operational taxonomic units (OTUs).
-With this information, we will create two data structures. 
-First, we will create a site-by-species matrix. 
-Second, we will make a taste-profile matrix. 
-We will use these data structures to:
+Each student will sample the source community and bin their jelly beans into operational taxonomic units (OTUs).
 
-1) explore their sampling efforts and their effects on species richness using **coverage** and **rarefaction** concept,
+## SAMPLING PROTOCOL: SITE-BY-SPECIES MATRIX
 
-2) measure **alpha diversity** for each sub-sample collated from data with their peers from the same source community,
+1. From the well-mixed source community, each student should take one Dixie Cup full of individuals.
 
-3) examine **beta diversity** between each source community using the data generated across each source community, and 
+2. At your desk, sort the jelly beans into different types (i.e., OTUs), and quantify the abundance of each OTU.  
 
-4) use **data wrangling** tools they have learned during the class to accomplish the above goals.
+3. Working with other students, merge data into a site-by-species matrix with dimensions equal to the number of students (rows) and taxa (columns)
 
-## SAMPLING PROTOCOL TO CONSTRUCT A SITE-BY-SPECIES MATRIX
+4. Create a worksheet (e.g., Google sheet) and share the site-by-species matrix with the class. 
 
-1. From the source community, each student should take a sample of ~75 individual or about half of a Dixie Cup.
+```{r, echo = FALSE, fig.align = 'center', out.width = "80%", fig.cap = "\\textbf{Left}: taxonomic key, \\textbf{Top right}: rank abundance distribution, \\textbf{Bottom right}: source community"}
+knitr::include_graphics("data/jelly.png")
+```
 
-2. At your desk, count the total number of individuals (*N*), sort the jelly beans into different types (i.e., OTUs), and quantify the abundance of each OTU.  
+## SAMPLING PROTOCOL: PREFERENCE-PROFILE MATRIX
 
-3. Work with other students in your group to assemble data into a site-by-species matrix on the white board. 
-One person needs to create a worksheet (e.g., Google sheet) and share the group's site-by-species matrix with the class. 
+1. With your individual sample only, each student should choose their top 5-10 preferred taxa based on flavor, color, sheen, etc.
+
+2. Working with other students, merge data into preference-profile incidence matrix where 1 = preferred and 0 = non-preferred taxa.
+
+3. Create a worksheet (e.g., Google sheet) and share the preference-profile matrix with the class. 
+
+### 1) R SETUP
+
+In the R code chunk below, please provide the code to: 
+1) Clear your R environment,
+2) Print your current working directory,
+3) Set your working directory to your `Week5-Confection/` folder, and
+4) Load the `vegan` R package (be sure to install first if you have not already).
+
+```{r}
 
 
-## SAMPLING PROTOCOL TO CONSTRUCT A TASTE-PROFILE MATRIX
-
-1. After creating the site-by-species matrix, each student will create a taste-profile based on the jelly beans contained in their own sample.
-Pick your top 5-10 taxa based on flavor, color, sheen, speckle, etc. 
-
-2. Work with other students in your group to assemble data into taste-profile incidence matrix on the white board where 1 = preferred and 0 = non-preferred jelly bean types.
-One person needs to create a worksheet (e.g., Google sheet) and share the group's taste-profile matrix with the class. 
-Make sure that each row (student) is identified by name and that each jelly bean type sampled is included with a unique taxonomic identifier. 
-
+```
 
 ## DATA ANALYSIS
 
-### 1) Sampling coverage and rarefaction curves
-
-**Question 1:** Using the site-by-species matrix, explore how well your sampling effort was. 
-Compare your sampling efforts with other groups. 
-Do you think that your samples cover the actual diversity found in each source community? You can use rarefaction and coverage tools you have learned earlier. 
-
-**Answer 1:** Use the space below to generate a rarefaction curve/sample coverage based on the data we collected in class for each community. 
-Make sure to annotate your code using # symbols so others (including instructors) understand what you have done and why you have done it. 
+**Question 1:** In the space below, generate a rarefaction plot for all samples of the source community. 
+Based on these results, discuss how individual vs. collective sampling efforts capture the diversity of the source community.
 
 ```{r}
+
+
 ```
 
+> ***Answer 1***:
+>
 
-### 2) Alpha diversity
 
-**Question 2:** Compare alpha diversity measures within sites and among communities. 
-You can calculate and plot richness, Shannon diversity, and Simpson index. 
-You can also convert these indices to effective number of species using the Hill numbers concept by generating a diversity profile, which will make comparisons easier across sites. 
-
-What is the variation among the samples in your group and between the communities of other groups for the alpha diversity indices? Generate a hypothesis around the diversity metrics you chose and test your hypothesis. Interpret your findings.
-
-**Answer 2a - Analysis:** Use the space below for code that is being used to analyze your data and test your hypotheses on your chosen alpha diversity tool. 
-Make sure to annotate your code using # symbols so others (including instructors) understand what you have done and why you have done it.
+**Question 2:** Starting with the site-by-species matrix, visualize beta diversity.
+In the code chunk below, conduct principal coordinates analyses (PCoA) using both an abundance- and incidence-based resemblance matrix.
+Plot the sample scores in species space using different colors, symbols, or labels.
+Which "species" are contributing the patterns in the ordinations?
+How does the choice of resemblance matrix affect your interpretation?
 
 ```{r}
+
+
 ```
 
-**Answer 2b - Plot:** With your analysis, create one (and only one, although it can have multiple panels) *publication-quality* figure.
+> ***Answer 2***:
+>
+
+
+**Question 3** Using the preference-profile matrix, determine the most popular jelly bean in the class using a control structure (e.g., for loop, if statement, function, etc).
 
 ```{r}
+
+
 ```
 
-**Answer 2c - Interpret results:** Write an informative yet succinct (~5 sentences) caption that creates a "stand-alone" figure. Take a peek at figures and figure captions in a paper published in your favorite journal for inspiration.
+> ***Answer 3***:
+>
 
 
-### 3) Beta diversity
+**Question 4**
+In the code chunk below, identify the student in QB who has a preference-profile that is most like yours. 
+Quantitatively, how similar are you to your "jelly buddy"?
+Visualize the preference profiles of the class by creating a cluster dendogram.
+Label each terminal node (a.k.a., tip or "leaf") with the student's name or initials.
+Make some observations about the preference-profiles of the class. 
 
-**Question 3:** Measure beta diversity using ordination and multivariate statistics methods. 
-You can create a PCoA plot, based on Bray-Curtis dissimilarity, of sites and communities using different shape and color codes. 
 
 ```{r}
+
+
 ```
 
-**Answer 3a - Plot:** With your analysis, create one (and only one, although it can have multiple panels) *publication-quality* figure.  
-
-```{r}
-```
-
-**Answer 3b - Interpret results:** Write an informative yet succinct (~5 sentences) caption that creates a "stand-alone" figure. Take a peek at figures and figure captions in a paper published in your favorite journal for inspiration.
-
-
-### 4) Taste profile
-
-**Question 4** Using R, determine the most popular jelly bean in the class? 
-**Question 5** Using R, quantitatively determine the other student in QB who has the most similar taste profile (i.e., "jelly buddy")
-**Question 6** Create a cluster diagram or ordination depicting the taste profiles of the class with symbols labeled by student name. Make some observations. 
+> ***Answer 4***:
+>
 
 
 
 
 ## SUBMITTING YOUR ASSIGNMENT
-Use Knitr to create a PDF of your completed 7.DiversitySynthesis_Worksheet.Rmd document, push it to GitHub, and create a pull request.
+Use Knitr to create a PDF of your completed `7.DiversitySynthesis_Worksheet.Rmd` document, push it to GitHub, and create a pull request.
 Please make sure your updated repo includes both the pdf and RMarkdown files.
 
-Unless otherwise noted, this assignment is due on **Wednesday, February 15^th^, 2023 at 12:00 PM (noon)**.
+Unless otherwise noted, this assignment is due on **Wednesday, February 19^th^, 2025 at 12:00 PM (noon)**.

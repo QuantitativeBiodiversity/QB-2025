@@ -74,6 +74,7 @@ for (package in package.list) {
 }
 
 #comment out after first run to prevent continuous reinstall/update
+
 #pak::pkg_install("msa")
 
 library(msa)

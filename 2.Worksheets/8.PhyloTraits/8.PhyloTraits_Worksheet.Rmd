@@ -1,5 +1,5 @@
 ---
-title: '11\. Worksheet: Phylogenetic Diversity - Traits'
+title: '8\. Worksheet: Phylogenetic Diversity - Traits'
 author: "Student Name; Z620: Quantitative Biodiversity, Indiana University"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: pdf_document
@@ -26,29 +26,24 @@ After completing this exercise you will be able to:
 Space for your answers is provided in this document and is indicated by the ">" character.
 If you need a second paragraph be sure to start the first line with ">".
 You should notice that the answer is highlighted in green by RStudio (color may vary if you changed the editor theme). 
-5. Before you leave the classroom today, it is *imperative* that you **push** this file to your GitHub repo, at whatever stage you are. This will enable you to pull your work onto your own computer.
-6. When you have completed the worksheet, **Knit** the text and code into a single PDF file by pressing the `Knit` button in the RStudio scripting panel.
-This will save the PDF output in your '8.PhyloTraits' folder.
-7. After Knitting, please submit the worksheet by making a **push** to your GitHub repo and then create a **pull request** via GitHub.
-Your pull request should include this file (**8.PhyloTraits_Worksheet.Rmd**) with all code blocks filled out and questions answered) and the PDF output of `Knitr` (**8.PhyloTraits_Worksheet.pdf**).
+5. Before you leave the classroom, **push** this file to your GitHub repo.
+6. For the assignment portion of the worksheet, follow the directions at the bottom of this file. 
+7. When you are done, **Knit** the text and code into a PDF file.
+8. After Knitting, submit the completed exercise by creating a **pull request** via GitHub.
+Your pull request should include this file `PhyloTraits_Worskheet.Rmd` and the PDF output of `Knitr` (`PhyloTraits_Worskheet.pdf`).
 
-The completed exercise is due on **Wednesday, February 22^nd^, 2023 before 12:00 PM (noon)**.
+The completed exercise is due on **Wednesday, February 26^th^, 2025 before 12:00 PM (noon)**.
 
 ## 1) SETUP
-
-Typically, the first thing you will do in either an R script or an RMarkdown file is setup your environment. 
-This includes things such as setting the working directory and loading any packages that you will need.
 
 In the R code chunk below, provide the code to:  
 1. clear your R environment,  
 2. print your current working directory,  
-3. set your working directory to your "*/8.PhyloTraits*" folder, and  
+3. set your working directory to your `Week6-PhyloTraits/` folder, and  
 4. load all of the required R packages (be sure to install if needed).  
 
 ```{r}
-rm(list = ls())
-getwd()
-setwd("~/GitHub/QB-2023/2.Worksheets/8.PhyloTraits")
+
 
 ```
 
@@ -129,29 +124,6 @@ In the R code chunk below, do the following:
 
 ```
 
-In the R code chunk below, do the following:  
-1. pick another substitution model,  
-2. create a distance matrix and tree for this model,  
-3. make a saturation plot that compares that model to the *Felsenstein (F84)* model,  
-4. make a cophylogenetic plot that compares the topologies of both models, and  
-5. be sure to format, add appropriate labels, and customize each plot.
-
-```{r}
-
-
-```
-
-***Question 4***:  
-
-a. Describe the substitution model that you chose. What assumptions does it make and how does it compare to the F84 model?
-b. Using the saturation plot and cophylogenetic plots from above, describe how your choice of substitution model affects your phylogenetic reconstruction. 
-If the plots are inconsistent with one another, explain why.
-c. How does your model compare to the *F84* model and what does this tell you about the substitution rates of nucleotide transitions?
-
-> ***Answer 4a***:   
-> ***Answer 4b***:   
-> ***Answer 4c***:   
-
 ### C) ANALYZING A MAXIMUM LIKELIHOOD TREE
 
 In the R code chunk below, do the following:  
@@ -163,7 +135,7 @@ In the R code chunk below, do the following:
 
 ```
 
-***Question 5***:  
+***Question 4***:  
 
 a) How does the maximum likelihood tree compare the to the neighbor-joining tree in the handout? 
 If the plots seem to be inconsistent with one another, explain what gives rise to the differences.
@@ -174,13 +146,13 @@ c) What do the bootstrap values tell you?
 
 d) Which branches have very low support? 
 
-e) Should we trust these branches? 
+e) Should we trust these branches? Why or why not?
 
-> ***Answer 5a***:   
-> ***Answer 5b***:   
-> ***Answer 5c***:   
-> ***Answer 5d***:   
-> ***Answer 5e***:   
+> ***Answer 4a***:   
+> ***Answer 4b***:   
+> ***Answer 4c***:   
+> ***Answer 4d***:   
+> ***Answer 4e***:   
 
 
 ## 5) INTEGRATING TRAITS AND PHYLOGENY
@@ -232,18 +204,18 @@ In the R code chunk below, do the following:
 
 ```
 
-***Question 6***:  
+***Question 5***:  
 
-a) Make a hypothesis that would support a generalist-specialist trade-off.
+a) Develop a hypothesis that would support a generalist-specialist trade-off.
 
 b) What kind of patterns would you expect to see from growth rate and niche breadth values that would support this hypothesis?
 
-> ***Answer 6a***:   
-> ***Answer 6b***:   
+> ***Answer 5a***:   
+> ***Answer 5b***:   
 
 ## 6) HYPOTHESIS TESTING
 
-### A) Phylogenetic Signal: Pagel's Lambda 
+### Phylogenetic Signal: Pagel's Lambda 
 
 In the R code chunk below, do the following:  
 1. create two rescaled phylogenetic trees using lambda values of 0.5 and 0,   
@@ -263,82 +235,21 @@ In the R code chunk below, do the following:
 
 ```
 
-***Question 7***:  There are two important outputs from the `fitContinuous()` function that can help you interpret the phylogenetic signal in trait data sets. 
+***Question 6***:  There are two important outputs from the `fitContinuous()` function that can help you interpret the phylogenetic signal in trait data sets. 
 a. Compare the lambda values of the untransformed tree to the transformed (lambda = 0).
-b. Compare the Akaike information criterion (AIC) scores of the two models. Which model would you choose based off of AIC score (remember the criteria that the difference in AIC values has to be at least 2)?
+b. Compare the Akaike information criterion (AIC) scores of the two models. 
+Which model would you choose based off of AIC score (remember the criteria that the difference in AIC values has to be at least 2)?
 c. Does this result suggest that there's phylogenetic signal?
 
-> ***Answer 7a***:  
-> ***Answer 7b***:  
-> ***Answer 7c***:  
-
-### B) Phylogenetic Signal: Blomberg's K 
-
-In the R code chunk below, do the following:  
-1. correct tree branch-lengths to fix any zeros,  
-2. calculate Blomberg's K for each phosphorus resource using the `phylosignal()` function,  
-3. use the Benjamini-Hochberg method to correct for false discovery rate, and  
-4. calculate Blomberg's K for niche breadth using the `phylosignal()` function.
-
-```{r}
+> ***Answer 6a***:  
+> ***Answer 6b***:  
+> ***Answer 6c***:  
 
 
-```
-
-***Question 8***: Using the K-values and associated p-values (i.e., "PIC.var.P"") from the `phylosignal` output, answer the following questions:
-
-a.  Is there significant phylogenetic signal for niche breadth or standardized growth on any of the phosphorus resources?  
-b.  If there is significant phylogenetic signal, are the results suggestive of clustering or overdispersion?  
-
-> ***Answer 8a***:   
-> ***Answer 8b***:   
-
-### C.  Calculate Dispersion of a Trait
-
-In the R code chunk below, do the following:  
-1. turn the continuous growth data into categorical data,  
-2. add a column to the data with the isolate name,  
-3. combine the tree and trait data using the `comparative.data()` function in `caper`, and  
-4. use `phylo.d()` to calculate *D* on at least three phosphorus traits.
-
-```{r}
-
-
-```
-
-***Question 9***: Using the estimates for *D* and the probabilities of each phylogenetic model, answer the following questions:
-
-a.  Choose three phosphorus growth traits and test whether they are significantly clustered or overdispersed?  
-b.  How do these results compare the results from the Blomberg's K analysis?  
-c.  Discuss what factors might give rise to differences between the metrics.  
-
-> ***Answer 9a***:  
-> ***Answer 9b***:  
-> ***Answer 9c***:  
-
-### D. Correspondence between trait clusters and phylogeny
-
-In the R code chunk below, do the following:  
-1. calculate Jaccard Index on resource use incidence matrix 
-2. create a hierarchical cluster of resource use
-3. map the resource use cluster onto the phylogeny for each environment, and  
-4. use `RF.dist` and `mantel` to measure the degree of correspondence between each dendrogram.
-
-```{r}
-
-
-```
-
-***Question 10***: Using a hierarchical clustering algorithm, map similarity in resource use map onto the phylogeny and answer the following questions:
-
-a. Compare the patterns between resource use and phylogeny between each lake. How do the two sets of tangelgrams differ between the taxa isolated from each lake?
-b. Interpret the Robinson-Fould index and Mantel correlation test results. How does each analysis differ and shape our interpretation of correlating niche overlap with phylogeny.
-
-> ***Answer 9a***:  
-> ***Answer 9b***: 
 
 ## 7) PHYLOGENETIC REGRESSION
 
+***Question 7***: 
 In the R code chunk below, do the following:  
 1. Clean the resource use dataset to perform a linear regression to test for differences in maximum growth rate by niche breadth and lake environment.
 2. Fit a linear model to the trait dataset, examining the relationship between maximum growth rate by niche breadth and lake environment,
@@ -352,13 +263,14 @@ In the R code chunk below, do the following:
 
 a. Why do we need to correct for shared evolutionary history?
 b. How does a phylogenetic regression differ from a standard linear regression?
-c. Interpret the slope and fit of each model. Did accounting for shared evolutionary history improve or worsen the fit?
+c. Interpret the slope and fit of each model. 
+Did accounting for shared evolutionary history improve or worsen the fit?
 d. Try to come up with a scenario where the relationship between two variables would completely disappear when the underlying phylogeny is accounted for.
 
-> ***Answer 10a***:  
-> ***Answer 10b***:  
-> ***Answer 10c***:  
-> ***Answer 10d***:  
+> ***Answer 7a***:  
+> ***Answer 7b***:  
+> ***Answer 7c***:  
+> ***Answer 7d***:  
 
 
 ## 7) SYNTHESIS
@@ -396,6 +308,11 @@ Is there anything you could do differently that would improve your tree, especia
 
 ```
 
+
+## SUBMITTING YOUR ASSIGNMENT
+Use Knitr to create a PDF of your completed `8.PhyloTraits_Worksheet.Rmd` document, push it to GitHub, and create a pull request.
+Please make sure your updated repo include both the pdf and RMarkdown files.
+Unless otherwise noted, this assignment is due on **Wednesday, February 26^th^, 2025 at 12:00 PM (noon)**.
 
 
 
